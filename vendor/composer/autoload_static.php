@@ -663,6 +663,8 @@ class ComposerStaticInite8e0d0fbf57da80c8ecc75ed136dd072
         'App\\Http\\Controllers\\AdminPesertaDidikDataUtamaController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminPesertaDidikDataUtamaController.php',
         'App\\Http\\Controllers\\AdminPesertaDidikLampiranBerkasController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminPesertaDidikLampiranBerkasController.php',
         'App\\Http\\Controllers\\AdminPesertaDidikLengkapController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminPesertaDidikLengkapController.php',
+        'App\\Http\\Controllers\\AdminPrakerinBidangUsahaController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminPrakerinBidangUsahaController.php',
+        'App\\Http\\Controllers\\AdminPrakerinInstansiController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminPrakerinInstansiController.php',
         'App\\Http\\Controllers\\AdminProdiController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminProdiController.php',
         'App\\Http\\Controllers\\AdminRombelController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminRombelController.php',
         'App\\Http\\Controllers\\AdminSekolahController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminSekolahController.php',

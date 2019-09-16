@@ -21,6 +21,8 @@ return array(
     'App\\Http\\Controllers\\AdminPesertaDidikDataUtamaController' => $baseDir . '/app/Http/Controllers/AdminPesertaDidikDataUtamaController.php',
     'App\\Http\\Controllers\\AdminPesertaDidikLampiranBerkasController' => $baseDir . '/app/Http/Controllers/AdminPesertaDidikLampiranBerkasController.php',
     'App\\Http\\Controllers\\AdminPesertaDidikLengkapController' => $baseDir . '/app/Http/Controllers/AdminPesertaDidikLengkapController.php',
+    'App\\Http\\Controllers\\AdminPrakerinBidangUsahaController' => $baseDir . '/app/Http/Controllers/AdminPrakerinBidangUsahaController.php',
+    'App\\Http\\Controllers\\AdminPrakerinInstansiController' => $baseDir . '/app/Http/Controllers/AdminPrakerinInstansiController.php',
     'App\\Http\\Controllers\\AdminProdiController' => $baseDir . '/app/Http/Controllers/AdminProdiController.php',
     'App\\Http\\Controllers\\AdminRombelController' => $baseDir . '/app/Http/Controllers/AdminRombelController.php',
     'App\\Http\\Controllers\\AdminSekolahController' => $baseDir . '/app/Http/Controllers/AdminSekolahController.php',
