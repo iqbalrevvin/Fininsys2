@@ -385,4 +385,22 @@
         return $nama;
     }
 
+    /*START::INSTANSI*/
+        function nama_instansi($id_instansi){
+            $instansi = DB::table('prakerin_instansi')
+                            ->select('nama')
+                            ->where('id', $id_instansi)
+                            ->first();
+            return $instansi->nama;
+        }
+
+        function bidang_instansi($id_bidang){
+            $instansi = DB::table('prakerin_bidang_usaha')
+                            ->select('nama')
+                            ->where('id', $id_bidang)
+                            ->first();
+            return $instansi->nama;
+        }
+    /*END::INSTANSI*/
+
  ?>

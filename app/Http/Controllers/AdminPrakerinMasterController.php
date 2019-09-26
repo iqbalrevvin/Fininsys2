@@ -33,6 +33,7 @@
 			$this->col[] = ["label"=>"Nama Master","name"=>"nama"];
 			$this->col[] = ["label"=>"Tahun Ajaran","name"=>"tahun_ajaran_id","join"=>"tahun_ajaran,nama"];
 			$this->col[] = ["label"=>"Program Studi","name"=>"prodi_id","join"=>"prodi,nama"];
+			$this->col[] = ["label"=>"Rombel","name"=>"rombel_id","join"=>"rombel,nama"];
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -41,6 +42,7 @@
 			$this->form[] = ['label'=>'Nama Master','name'=>'nama','type'=>'text','validation'=>'required','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'Tahun Ajaran','name'=>'tahun_ajaran_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-4','datatable'=>'tahun_ajaran,nama'];
 			$this->form[] = ['label'=>'Program Studi','name'=>'prodi_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-5','datatable'=>'prodi,nama'];
+			$this->form[] = ['label'=>'Rombel','name'=>'rombel_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-5','datatable'=>'rombel,nama'];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -79,7 +81,9 @@
 	        | 
 	        */
 	        $this->addaction = array();
-
+	        $this->addaction[] = [
+	        	'label'=>'Peserta','url'=>CRUDBooster::adminPath('prakerin/kelola/peserta/[id]'),'icon'=>'flaticon-network','color'=>'default',
+	        ];
 
 	        /* 
 	        | ---------------------------------------------------------------------- 

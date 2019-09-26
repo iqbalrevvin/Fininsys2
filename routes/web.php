@@ -32,9 +32,16 @@ Route::group([
         Route::get('admin/peserta-didik/list', 'PesertaDidik\PesertaDidikController@index')->name('pesdik.list');
         Route::get('admin/peserta-didik/profil/{pesdik}','PesertaDidik\PesertaDidikController@profil');
     /*END::PESERTA DIDIK*/
-    /*STAR::PESERTA DIDIK*/
+    /*STAR::TENAGA PENDDIDIK*/
         Route::get('admin/tenaga-pendidik/jabatan', 'TenagaPendidik\TenagaPendidikController@jabatan')->name('tenpen.jabatan');
-    /*END::PESERTA DIDIK*/
+    /*END::TENAGA PENDDIDIK*/
+    /*STAR::PRAKERIN*/
+        Route::get('admin/prakerin/kelola/peserta/{id}', 'Prakerin\PrakerinController@peserta');
+        Route::post('admin/prakerin/kelola/insert-penempatan', 'Prakerin\PrakerinController@insert_penempatan')
+                ->name('prakerin.insert_penempatan');
+        Route::get('admin/prakerin/get-instansi', 'Prakerin\PrakerinController@get_list_instansi')->name('prakerin.list_instansi');
+        Route::get('admin/prakerin/get-peserta', 'Prakerin\PrakerinController@get_list_peserta')->name('prakerin.list_peserta');
+    /*END::PRAKERIN*/
 });
 
 

@@ -8,6 +8,11 @@ class Kelas extends Model
 {
     protected $table = 'kelas';
 
+    public function MasterPrakerin()
+    {
+    	
+    }
+
     public function rombel()
     {
         return $this->hasMany(Rombel::Class);

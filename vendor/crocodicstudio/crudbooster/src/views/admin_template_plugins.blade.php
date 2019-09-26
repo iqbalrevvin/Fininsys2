@@ -56,6 +56,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/pace-preloader/blue/pace-theme-center-simple.css')}}" />
 <script src="{{ asset('vendor/pace-preloader/pace.min.js')}}" type="text/javascript"></script>
 
+
 <script>
     var ASSET_URL = "{{asset('/')}}";
     var APP_NAME = "{{Session::get('appname')}}";

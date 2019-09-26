@@ -3,10 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Prakerin\PrakerinMaster;
 class Rombel extends Model
 {
     protected $table = 'rombel';
+
+    public function master_prakerin()
+    {
+        return $this->hasMany(PrakerinMaster::Class);
+    }
 
     /**
      * [Relasi Rombel Dimiliki Kelas]

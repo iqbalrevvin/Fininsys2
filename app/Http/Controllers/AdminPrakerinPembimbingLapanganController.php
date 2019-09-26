@@ -5,15 +5,14 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminRombelController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminPrakerinPembimbingLapanganController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "id";
+			$this->title_field = "nama";
 			$this->limit = "20";
-			$this->orderby = "kelas_id,desc";
-			$this->orderby = "tahun_ajaran_id,desc";
+			$this->orderby = "nama,asc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -22,40 +21,35 @@
 			$this->button_edit = true;
 			$this->button_delete = true;
 			$this->button_detail = true;
-			$this->button_show = false;
+			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "rombel";
+			$this->table = "prakerin_pembimbing_lapangan";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Nama Rombel","name"=>"nama"];
-			$this->col[] = ["label"=>"Wali Kelas","name"=>"tenpen_id","join"=>"tenpen,nama_lengkap"];
-			$this->col[] = ["label"=>"Tahun Ajaran","name"=>"tahun_ajaran_id","join"=>"tahun_ajaran,nama"];
-			$this->col[] = ["label"=>"Jumlah Peserta","name"=>"(select count(pesdik_rombel.id) from pesdik_rombel where pesdik_rombel.rombel_id = rombel.id) as total_pesdik"];
-			$this->col[] = ["label"=>"Kelas","name"=>"kelas_id","join"=>"kelas,nama"];
-			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
-			$this->col[] = ["label"=>"Dibuat Pada","name"=>"created_at"];
+			$this->col[] = ["label"=>"NIK","name"=>"NIK"];
+			$this->col[] = ["label"=>"Nama","name"=>"nama"];
+			$this->col[] = ["label"=>"No Hp","name"=>"no_hp"];
+			$this->col[] = ["label"=>"Alamat","name"=>"alamat"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Nama Rombel','name'=>'nama','type'=>'text','validation'=>'required|max:191','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Kelas','name'=>'kelas_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-2','datatable'=>'kelas,nama'];
-			$this->form[] = ['label'=>'Wali Kelas','name'=>'tenpen_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-4','datatable'=>'tenpen,nama_lengkap'];
-			$this->form[] = ['label'=>'Tahun Ajaran','name'=>'tahun_ajaran_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-2','datatable'=>'tahun_ajaran,nama'];
-			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'max:255','width'=>'col-sm-10'];
-
+			$this->form[] = ['label'=>'NIK','name'=>'NIK','type'=>'text','validation'=>'min:1|max:16','width'=>'col-sm-7'];
+			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-7','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
+			$this->form[] = ['label'=>'No Hp','name'=>'no_hp','type'=>'text','validation'=>'required|numeric','width'=>'col-sm-5','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
+			$this->form[] = ['label'=>'Alamat Lengkap','name'=>'alamat','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-7'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Kelas Id","name"=>"kelas_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"kelas,nama"];
-			//$this->form[] = ["label"=>"Tenpen Id","name"=>"tenpen_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"tenpen,nama_lengkap"];
-			//$this->form[] = ["label"=>"Tahun Ajaran Id","name"=>"tahun_ajaran_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"tahun_ajaran,nama"];
-			//$this->form[] = ["label"=>"Keterangan","name"=>"keterangan","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ['label'=>'NIK','name'=>'NIK','type'=>'text','validation'=>'min:1|max:16','width'=>'col-sm-7'];
+			//$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-7','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
+			//$this->form[] = ['label'=>'No Hp','name'=>'no_hp','type'=>'number','validation'=>'required|numeric','width'=>'col-sm-5','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
+			//$this->form[] = ['label'=>'Alamat Lengkap','name'=>'alamat','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-7'];
 			# OLD END FORM
 
 			/* 
@@ -85,9 +79,7 @@
 	        | 
 	        */
 	        $this->addaction = array();
-	        $this->addaction[] = [
-	        	'label'=>'Kelola','url'=>CRUDBooster::mainpath('kelola/[id]'),'icon'=>'flaticon-presentation','color'=>'default',
-	        ];
+
 
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -110,8 +102,10 @@
 	        | @type    = warning,success,danger,info        
 	        | 
 	        */
-	        $this->alert        = array();  
-	        // $this->alert[] = ["message"=>"<b>Pastikan untuk tidak menambah kelas dan tahun ajaran yang sama!</b>","type"=>"dark"];
+	        $this->alert        = array();
+	                
+
+	        
 	        /* 
 	        | ---------------------------------------------------------------------- 
 	        | Add more button to header button 
@@ -122,7 +116,7 @@
 	        | 
 	        */
 	        $this->index_button = array();
-	        $this->index_button[] = ['label'=>'Manajemen Rombel','url'=>CRUDBooster::mainpath("print"),"icon"=>"flaticon-network"];
+
 
 
 	        /* 
@@ -134,7 +128,7 @@
 	        | 
 	        */
 	        $this->table_row_color = array();     	          
-	        //$this->table_row_color[] = ['condition'=>"[kelas_id] == 4","color"=>"table-success"];
+
 	        
 	        /*
 	        | ---------------------------------------------------------------------- 
@@ -253,12 +247,7 @@
 	    |
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
-	    	if($column_index == 4) { 
-	    		$column_value = "<div style='text-align:center'><b>$column_value</b></div>"; 
-	    	}
-	    	if ($column_index == 1) {
-	    		$column_value = "<div style='text-align:center'><b>$column_value</b></div>"; 
-	    	}
+	    	//Your code here
 	    }
 
 	    /*
@@ -269,17 +258,8 @@
 	    |
 	    */
 	    public function hook_before_add(&$postdata) {        
-	        //$cekRombel 	= DB::table('rombel')->where('id', $id)->first();
-	        $kelasID 	= $postdata['kelas_id'];
-	        $tahunID 	= $postdata['tahun_ajaran_id'];
-	        $cekRombel = DB::table('rombel')
-	        				->where('kelas_id', $kelasID)
-	        				->where('tahun_ajaran_id', $tahunID)
-	        				->exists();
-	        if($cekRombel){
-	        	DB::table('rombel')->where('id', $id)->delete();
-	        	CRUDBooster::redirect(CRUDBooster::mainpath(''),"Kelas & Tahun Ajaran Yang Ditambahkan Sudah Tersedia","warning");
-	        }
+	        //Your code here
+
 	    }
 
 	    /* 
@@ -290,6 +270,7 @@
 	    | 
 	    */
 	    public function hook_after_add($id) {        
+	        //Your code here
 
 	    }
 
@@ -302,15 +283,7 @@
 	    | 
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
-	        $kelasID 	= $postdata['kelas_id'];
-	        $tahunID 	= $postdata['tahun_ajaran_id'];
-	        $cekRombel = DB::table('rombel')
-	        				->where('kelas_id', $kelasID)
-	        				->where('tahun_ajaran_id', $tahunID)
-	        				->exists();
-	        if($cekRombel){
-	        	CRUDBooster::redirect(CRUDBooster::mainpath(''),"Kelas & Tahun Ajaran Yang Ditambahkan Sudah Tersedia","warning");
-	        }
+	        //Your code here
 
 	    }
 
@@ -334,10 +307,8 @@
 	    | 
 	    */
 	    public function hook_before_delete($id) {
-	       $cekPeserta = DB::table('pesdik_rombel')->select('pesdik_id')->where('rombel_id', $id)->exists();
-	       if($cekPeserta) {
-	       		CRUDBooster::redirect(CRUDBooster::mainpath(''),"Rombel Berisi Peserta Didik Tidak Dapat Dihapus!","danger");
-	       }
+	        //Your code here
+
 	    }
 
 	    /* 
