@@ -4,6 +4,7 @@ namespace App\Models\Prakerin;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Tenpen;
+use App\Models\Pesdik;
 class Penempatan extends Model
 {
     protected $table = 'prakerin_penempatan';
@@ -25,6 +26,18 @@ class Penempatan extends Model
     	return $this->belongsTo(PembimbingLapangan::Class);
     }
 
+    public function tenpen()
+    {
+        return $this->belongsTo(Tenpen::Class);
+    }
+
+    public function pesdik()
+    {
+        return $this->belongsToMany(Pesdik::Class);
+    }
+
+
+    /*START::CUSTOM FUNCTION*/
     public function data_instansi($id)
     {
     	$instansi = Instansi::find($id);

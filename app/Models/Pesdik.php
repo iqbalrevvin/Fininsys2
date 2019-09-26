@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Prakerin\Penempatan;
 class Pesdik extends Model
 {
     protected $table = 'pesdik';
@@ -30,6 +30,11 @@ class Pesdik extends Model
     public function status_pesdik()
     {
         return $this->belongsTo(StatusPesdik::Class);
+    }
+
+    public function penempatan()
+    {
+        return $this->belongsToMany(Penempatan::Class);
     }
 
 

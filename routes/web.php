@@ -39,8 +39,10 @@ Route::group([
         Route::get('admin/prakerin/kelola/peserta/{id}', 'Prakerin\PrakerinController@peserta');
         Route::post('admin/prakerin/kelola/insert-penempatan', 'Prakerin\PrakerinController@insert_penempatan')
                 ->name('prakerin.insert_penempatan');
+        Route::get('admin/prakerin/count-instansi/{id}','Prakerin\PrakerinController@count_instansi')->name('prakerin.count');
         Route::get('admin/prakerin/get-instansi', 'Prakerin\PrakerinController@get_list_instansi')->name('prakerin.list_instansi');
         Route::get('admin/prakerin/get-peserta', 'Prakerin\PrakerinController@get_list_peserta')->name('prakerin.list_peserta');
+        Route::get('admin/prakerin/delete-instansi', 'Prakerin\PrakerinController@delete_instansi')->name('prakerin.hapus_instansi');
     /*END::PRAKERIN*/
 });
 

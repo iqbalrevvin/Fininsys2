@@ -21,11 +21,12 @@
 	<div class="row">
 		<div class="col-md-6">
 			<!--begin::Portlet-->
-			<div class="kt-portlet kt-portlet--height-fluid">
+			<div class="data-instansi kt-portlet kt-portlet--height-fluid">
 				<div class="kt-portlet__head">
 					<div class="kt-portlet__head-label">
 						<span class="kt-portlet__head-icon"><i class="flaticon-suitcase kt-font-brand"></i></span>
-						<h3 class="kt-portlet__head-title kt-font-brand">Instansi</h3> &nbsp; <small>(2 Instansi)</small>
+						<h3 class="kt-portlet__head-title kt-font-brand">Instansi</h3> &nbsp; 
+						<span>(<span id="count_instansi">{{ $list_instansi->count() }}</span> Instansi)</span>
 					</div>
 					<div class="kt-portlet__head-toolbar">
 						<div class="kt-portlet__head-actions">
@@ -41,7 +42,7 @@
 				</div>
 				<div class="kt-portlet__body">
 					<div class="kt-portlet__content">
-						<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="true" style="height: 700px;">
+						<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="true" style="height: 500px;">
 							<div id="show_instansi">
 				                <div class="kt-blockui text-justify">
 				                    <span>
@@ -59,8 +60,8 @@
 		</div>
 		<div class="col-md-6">
 			<!--begin::Portlet-->
-				<div id="list_peserta"><b>Klik/Pilih Nama Instansi/DU/DI untuk melihat data peserta</b></div>
-				<div id="load_list_peserta"></div>
+				<div id="konten_list_peserta"></div>
+				<div id="load_list_peserta"><b>Klik/Pilih Nama Instansi/DU/DI untuk melihat data peserta</b></div>
 			<!--end::Portlet-->
 		</div>
 	</div>
@@ -151,7 +152,6 @@
 @endsection
 
 @push('bottom')
-
 	<script type="text/javascript">
 		$.ajaxSetup({
 	        headers: {
@@ -197,6 +197,7 @@
 			        },
 			        success: function(response){
 			            $('#show_instansi').html(response);
+			            $('#count_instansi').load('{{ url('admin/prakerin/count-instansi/'.$master_prakerin->id) }}');
 			        }
 			    });
         	}
@@ -257,29 +258,81 @@
 			                  	show_instansi()		
 			                }
 			                else{
-			                   alert("Error occured !");
+			                   $('#add_tempat').modal('hide');
+			                   	$('#modalwindow').modal('hide');
+			                  	KTApp.unblock('.insert_penempatan');
+			                  	toastr.error(response.message, response.title);
+			                  	$(".add_tempat").trigger("reset");	
+			                  	show_instansi()	
 			                }       
 			            }
 			        });
 	        	} 	
 	        });
 
-	        $(document).on('click', '.btnKelolaNilai', function(e) {
-				$('#resultKontenKelolaNilai').fadeOut("slow");
-				$('#loadKontenKelolaNilai').show().html('<div class="m-blockui" id="loader-center"><span>Memuat Data Nilai Siswa</span><span><div class="m-loader m-loader--brand"></div></span></div>');
-		    	var idKelas 			= $(this).data('kelas');
+	        $(document).on('click', '.hapus_instansi', function() {
+	    		var id 				= $(this).data('id');
+	    		var nama_instansi 	= $(this).data('nama');
+	    		swal.fire({
+			        title: "KONFIRMASI TINDAKAN!",
+			        text: "Instansi "+nama_instansi+" Akan Dihapus Beserta Peserta Terkait",
+			        type: "warning",
+			        showCancelButton: true,
+			        confirmButtonColor: "#DD6B55",
+			        confirmButtonText: "Ya, Lanjutkan!",
+			        cancelButtonText: "Tidak, Kembali!",
+	    		}).then((result) => {
+	      			if(result.value) {
+				      	KTApp.block('.data-instansi', {
+		                	overlayColor: '#000000',
+		                	type: 'v2',
+		                	state: 'danger',
+		                	message: '<b>Menghapus Instansi '+nama_instansi+'...</b>'
+		            	});	
+	        			$.ajax({
+				      		url: '{{ route('prakerin.hapus_instansi') }}',
+				      		type: 'GET',
+				      		data: {
+				      			penempatan_id 		: id,
+				      			nama_instansi 		: nama_instansi,
+				           	},
+				           	dataType: 'json',
+				            beforeSend: function(e) {
+								if(e && e.overrideMimeType) {
+									e.overrideMimeType('application/jsoncharset=UTF-8')
+								}
+							},
+				      		success: function(response){
+				      			KTApp.unblock('.data-instansi');
+			                  	toastr.success(response.message, response.title);
+			                  	$(".add_tempat").trigger("reset");	
+			                  	show_instansi()
+			                  	$('#konten_list_peserta').fadeOut("slow");
+			                  	$('#load_list_peserta').show().html('<b id="loader-center">Silahkan Pilih Kembali Instansi</b>');
+				      		}
+				      	})
+	      			}
+	    		});
 
+			});
+
+	        $(document).on('click', '.kelola_peserta', function(e) {
+				$('#konten_list_peserta').fadeOut("slow");
+				$('#load_list_peserta').show().html('<div class="kt-block kt-page--loading" id="loader-center"><span><div class="kt-loader kt-bg-brand"></div></span><b>Memuat Data Peserta . . .</b></div>');
+		    	var penempatan_id 			= $(this).data('id');
+		    	var nama_instansi 			= $(this).data('nama');
 		    	$.ajax({
-		          	url: '',
+		          	url: '{{ route('prakerin.list_peserta') }}',
 		          	type: 'GET',
 		          	async: true,
 		          	data:{
-		          		idKelas 	: idKelas,
-		            	show 		: 1
+		          		penempatan_id 	: penempatan_id,
+		          		nama_instansi 	: nama_instansi,
+		            	show 			: 1
 		        	},
 		        success: function(response){
-		        $('#resultKontenKelolaNilai').fadeIn("slow").html(response);
-		        $('#loadKontenKelolaNilai').hide();
+		        	$('#konten_list_peserta').fadeIn("slow").html(response);
+		        	$('#load_list_peserta').hide();
 		              	//$("#jenisNasabah").selectpicker();
 		        }
 	      	});

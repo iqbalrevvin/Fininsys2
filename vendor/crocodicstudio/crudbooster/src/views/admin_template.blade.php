@@ -99,6 +99,12 @@
         @endif
 
         <style type="text/css">
+            #loader-center {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%,-50%);
+            }
             .dropdown-menu-action {
                 left: -130%;
             }

@@ -31,7 +31,7 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Nama","name"=>"nama"];
-			$this->col[] = ["label"=>"Bidang Usaha","name"=>"prakerin_bidang_usaha_id","join"=>"prakerin_bidang_usaha,nama"];
+			$this->col[] = ["label"=>"Bidang Usaha","name"=>"bidang_usaha_id","join"=>"prakerin_bidang_usaha,nama"];
 			$this->col[] = ["label"=>"No Telp","name"=>"no_telp"];
 			$this->col[] = ["label"=>"Email","name"=>"email"];
 			$this->col[] = ["label"=>"Web","name"=>"web"];
@@ -41,7 +41,7 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-7','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
-			$this->form[] = ['label'=>'Bidang Usaha','name'=>'prakerin_bidang_usaha_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-5','datatable'=>'prakerin_bidang_usaha,nama'];
+			$this->form[] = ['label'=>'Bidang Usaha','name'=>'bidang_usaha_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-5','datatable'=>'prakerin_bidang_usaha,nama'];
 			$this->form[] = ['label'=>'Provinsi','name'=>'provinsi_id','type'=>'select2','width'=>'col-sm-5','datatable'=>'provinsi,name'];
 			$this->form[] = ['label'=>'Kabupaten/Kota','name'=>'kabupaten_id','type'=>'select','width'=>'col-sm-5','datatable'=>'kabupaten,name','parent_select'=>'provinsi_id'];
 			$this->form[] = ['label'=>'Kecamatan','name'=>'kecamatan_id','type'=>'select','width'=>'col-sm-5','datatable'=>'kecamatan,name','parent_select'=>'kabupaten_id'];
