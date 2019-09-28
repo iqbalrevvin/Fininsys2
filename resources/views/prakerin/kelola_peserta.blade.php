@@ -1,5 +1,6 @@
 @extends('crudbooster::admin_template')
 @section('content')
+	<input type="hidden" id="rombel_id" value="{{ $master_prakerin->rombel->id }}">
 	<div class="alert alert-light alert-elevate" role="alert">
 			@if($master_prakerin->rombel->kelas->prodi->logo_prodi == NULL)
 				<div class="kt-userpic kt-userpic--lg kt-userpic--danger">
@@ -65,6 +66,7 @@
 			<!--end::Portlet-->
 		</div>
 	</div>
+	{{-- START::TAMBAH DATA INSTANSI --}}
 	<div class="modal fade" id="add_tempat" role="dialog" aria-labelledby="" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -148,7 +150,61 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	{{-- END::TAMBAH DATA INSTANSI --}}
+	{{-- STAR::DATA PILIH PESERTA PRAKERIN --}}	
+	<div class="modal fade" id="add_peserta_prakerin" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Data Rombel {{ $master_prakerin->rombel->kelas->nama }}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="kt-portlet kt-portlet--responsive-mobile" id="konten_tambah_peserta">
+					<div class="kt-portlet__head">
+						<div class="kt-portlet__head-label">
+							<span class="kt-portlet__head-icon">
+								<i class="flaticon-users kt-font-success"></i>
+							</span>
+							<span class=" kt-font-warning">
+								Pilih Peserta Didik Lalu Klik <i class="la la-plus-square kt-font-success"></i>
+								<span class="kt-font-success">Tambahkan</span><br>
+								<small class="kt-font-dark">PD yang ditampilkan adalah PD bertatus aktif</small>
+							</span>
+						</div>
+						<div class="kt-portlet__head-toolbar">
+							<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+								<button type="button" class="btn btn-success" id="btn_tambah_peserta_prakerin">
+									<i class="la la-plus-square"></i>Tambahkan
+								</button>
+								<button type="button" class="btn btn-secondary" id="reloadTabelPilihPeserta">
+									<i class="la la-refresh"></i>Muat Ulang
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="kt-portlet__body">
+						<table class="table table-striped- table-bordered table-hover" id="tbl_pilih_peserta_prakerin">
+	                        <thead>
+	                            <tr>
+	                                <th>
+	                                    <label class="kt-checkbox kt-checkbox--bold kt-checkbox--success">
+	                                        <input type="checkbox" id="check-all">Semua
+	                                            <span></span>
+	                                    </label>
+	                                </th>
+	                                <th>NIPD</th>
+	                                <th>Nama Peserta Didik</th>
+	                                <th>Jenis Kelamin</th>
+	                            </tr>
+	                        </thead>
+	                    </table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>	
+	{{-- END::DATA PILIH PESERTA PRAKERIN --}}
 @endsection
 
 @push('bottom')
@@ -172,6 +228,12 @@
 	            allowClear: true
 	        });
 	    });
+	    $(document).on('click', '#reloadTabelPilihPeserta', function(e) {
+        	tabel.ajax.reload(null,false); //reload datatable ajax 
+    	});
+    	$("#check-all").click(function () {
+		    $(".data-check").prop('checked', $(this).prop('checked'));
+		});
         var lang = '{{App::getLocale()}}';
         $(function () {
             $('.input_date').datepicker({
@@ -182,9 +244,36 @@
                 language: lang
             });
         });
+        var DatatablesBasicPaginations = {
+		    init: function() {
+		    	var master_id 		= $('#master_id').val();
+		    	var rombel_id 		= $('#rombel_id').val();
+		        tabel = $("#tbl_pilih_peserta_prakerin").DataTable({
+		            responsive: true,
+					searchDelay: 500,
+					processing: true,
+					serverSide: true,
+			        ajax: {
+						url: '{{ route('prakerin.get_list_pilih_peserta') }}',
+						method: 'GET',
+						data: {
+							master_id		: master_id,
+							rombel_id 		:rombel_id
+						},
+					},
+			        "columns":[
+			        	{ "data":"checkbox", orderable:false, searchable:false},
+			        	{ "data": "NIPD" },
+			            { "data": "nama_lengkap" },
+			            { "data": "jenis_kelamin" },
+			        ]
+		        })
+		    }
+		};
         jQuery(document).ready(function() {
         // START::OPERASI ---------------------------------------------------
         	show_instansi();
+        	DatatablesBasicPaginations.init();
         	function show_instansi(){
         		var master_id = $('#master_id').val();
         		$.ajax({
@@ -330,15 +419,71 @@
 		          		nama_instansi 	: nama_instansi,
 		            	show 			: 1
 		        	},
-		        success: function(response){
-		        	$('#konten_list_peserta').fadeIn("slow").html(response);
-		        	$('#load_list_peserta').hide();
+			        success: function(response){
+			        	$('#konten_list_peserta').fadeIn("slow").html(response);
+			        	$('#load_list_peserta').hide();
 		              	//$("#jenisNasabah").selectpicker();
-		        }
-	      	});
+		        	}
+	      		});	
+			});
+
+			$(document).on('click', '#btn_tambah_peserta_prakerin', function() {
+				var nama_instansi 		= $('#nama_instansi').val();
+	    		var penempatan_id 		= $('#penempatan_id').val();
+	    		var list_id = [];
+	    		$(".data-check:checked").each(function() {
+	            	list_id.push(this.value);
+	    		});
+	    		if(list_id.length > 0){
+		    		swal.fire({
+				        title: "KONFIRMASI TINDAKAN!",
+				        text: +list_id.length+" Peserta Didik Akan Didaftarkan Sebagai Peserta Prakerin Di "+nama_instansi,
+				        type: "info",
+				        showCancelButton: true,
+				        confirmButtonColor: "#DD6B55",
+				        confirmButtonText: "Ya, Lanjutkan!",
+				        cancelButtonText: "Tidak, Kembali!",
+		    		}).then((result) => {
+		      			if(result.value) {
+		        			KTApp.block("#konten_tambah_peserta", {
+					          overlayColor: "#000000",
+					          type: "loader",
+					          state: "primary",
+					          message: "<b>Menambakan Data Peserta Ke "+nama_instansi+"...</b>"
+					      	});
+		        			$.ajax({
+				                url: "{{ route('prakerin.insert_peserta') }}",
+				                method:"GET",
+				                data: {
+				                	id 				:list_id,
+				                	penempatan_id	:penempatan_id
+				                },
 			
-		});
-        // END::OPERASI -----------------------------------------------------
-        });
+				                success: function()
+				                {
+			                		KTApp.unblock("#konten_tambah_peserta");
+		                    		$('#add_peserta_prakerin').modal('hide');
+		                    		$('#modalwindow').modal('hide');
+		                    		tabel.ajax.reload(null,false); //reload datatable ajax 
+		                        	// kontenView();
+		                        	$('#konten_list_peserta').fadeOut("slow");
+			                  		$('#load_list_peserta').show().html('<b class="text-success">Peserta Berhasil Ditambahkan!!!<br>Silahkan Pilih Kembali Instansi</b>');
+		                        	toastr.success(+list_id.length+" Peserta berhasil ditambahkan ke "+nama_instansi, "Peserta Ditambahkan");
+				                },
+				                error: function (jqXHR, textStatus, errorThrown){
+				                    alert('Gagal Memproses Data, Coba Kembali Atau Hubungi Pihak Pengembang!');
+				                    KTApp.unblock("#konten_tambah_peserta");
+				                }
+				            });
+		      			}/*KONDISI JIKA MEMILIH YA UNTUK MEMASUKAN DATA SISWA*/
+		    		});
+		    	}else{
+		    		toastr.error("Pilih Terlebih Dahulu Peserta Didik Yang Akan Didaftarkan Ke "+nama_instansi, "Pilih Siswa!");
+		    	}
+			});
+        	// END::OPERASI -----------------------------------------------------
+        }); //JQUERY DOCUMENT READY
+		
+		
 	</script>
 @endpush

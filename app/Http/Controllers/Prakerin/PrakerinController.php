@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Prakerin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 use App\Models\Prakerin\PrakerinMaster;
 use App\Models\Prakerin\Instansi;
 use App\Models\Prakerin\PembimbingLapangan;
 use App\Models\Prakerin\Penempatan;
 use App\Models\Tenpen;
 use App\Models\Pesdik;
+use App\Models\Rombel;
+use Yajra\DataTables\DataTables;
 class PrakerinController extends Controller
 {
     public function index()
@@ -59,7 +62,7 @@ class PrakerinController extends Controller
     	$penempatan_id     = $request->input('penempatan_id');
         $nama_instansi     = $request->input('nama_instansi');
     	$list_peserta      = Penempatan::find($penempatan_id)->pesdik()->get();
-    	return view('prakerin.list_peserta', compact('list_peserta', 'nama_instansi'));
+    	return view('prakerin.list_peserta', compact('list_peserta', 'nama_instansi', 'penempatan_id'));
     }
 
     public function insert_penempatan(Request $request)
@@ -106,5 +109,58 @@ class PrakerinController extends Controller
         ];
 
         echo json_encode($callback);
+    }
+
+    public function get_list_pilih_peserta(DataTables $datatables, Request $request)
+    {
+        // $id = $request->input('id');
+        $master_id      = $request->input('master_id');
+        $rombel_id      = $request->input('rombel_id');
+        $cek_penempatan     = Penempatan::where('prakerin_master_id', $master_id)->exists();
+        if($cek_penempatan){ //JIKA PADA MASTER PRAKERIN SUDAH ADA INSTANSI
+            $penempatan     = Penempatan::where('prakerin_master_id', $master_id)->get();
+            foreach ($penempatan as $penempatan) { //TANGKAP DATA PENEMPATAN/INSTANSI
+                $penempatan_id[] = $penempatan->id;
+            }
+            $cek_list_peserta_terdaftar = DB::table('penempatan_pesdik')->whereIn('penempatan_id', $penempatan_id)->exists();
+            if($cek_list_peserta_terdaftar){// JIKA PADA PENEMPATAN TERDAPAT PESERTA TERDAFTAR
+                $list_peserta_terdaftar = DB::table('penempatan_pesdik')->whereIn('penempatan_id', $penempatan_id)->get();
+                foreach ($list_peserta_terdaftar as $list_peserta) { // TANGKAP DATA PESERTA
+                    $list[] = $list_peserta->pesdik_id;
+                }
+            }else{ // JIKA PADA TABEL PENEMPATAN_PESDIK KOSONG
+                $list = [];
+            }
+            
+            $pesdik     = Rombel::find($rombel_id)->pesdik()->select('*', 'pesdik.id as pesdikid')->whereNotIn('pesdik_id', $list);
+        }else{
+            $pesdik     = Rombel::find($rombel_id)->pesdik()->select('*', 'pesdik.id as pesdikid');
+        }
+        
+        
+
+        // $students = Pesdik::select('pesdik.id', 'pesdik.nama_lengkap', 'pesdik.jenis_kelamin', 'pesdik.NIPD', 'pesdik.NISN')
+        //                   ->where('status_pesdik_id', '1');
+        
+        return $datatables->eloquent($pesdik)
+                ->addColumn('checkbox', '<label class="kt-checkbox kt-checkbox--success"><input type="checkbox" name="student_checkbox[]" class="student_checkbox data-check" value="{{$pesdikid}}" /> Pilih<span></span></label>')
+                //->addColumn('nama', return $tahun_ajaran->nama);
+                ->rawColumns(['checkbox','action'])
+                ->make(true);
+    }
+
+    public function insert_peserta(Request $request)
+    {
+        $list_peserta   = $request->input('id');
+        $penempatan_id  = $request->input('penempatan_id');
+
+        foreach ($list_peserta as $list) {
+            $penempatan = Penempatan::find($penempatan_id);
+            if($penempatan->pesdik()->where('pesdik_id', $list)->exists()) {
+                //Tidak Ada Operasi
+            }else{
+                $penempatan->pesdik()->attach($list);
+            }
+        }
     }
 }

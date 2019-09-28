@@ -1,3 +1,5 @@
+<input type="hidden" id="penempatan_id" value="{{ $penempatan_id }}">
+<input type="hidden" id="nama_instansi" value="{{ $nama_instansi }}">
 <div class="kt-portlet kt-portlet--height-fluid">
 	<div class="kt-portlet__head">
 		<div class="kt-portlet__head-label">
@@ -7,7 +9,7 @@
 		<div class="kt-portlet__head-toolbar">
 			<div class="kt-portlet__head-actions">
 			<button type="button" class="btn btn-outline-success btn-elevate btn-pill btn-elevate-air btn-circle btn-icon btn-sm"
-				title="Tambahkan Peserta Prakerin">
+				title="Tambahkan Peserta Prakerin" data-toggle="modal" data-target="#add_peserta_prakerin">
 				<img src="{{ asset('metronic/media/icons/svg/Communication/Add-user.svg') }}"/>
 			</button>
 			<button type="button" class="btn btn-outline-info btn-elevate btn-pill btn-elevate-air btn-circle btn-icon btn-sm"
@@ -19,7 +21,7 @@
 	</div>
 	<div class="kt-portlet__body">
 		<div class="kt-portlet__content">
-			<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="true" style="height: 500px;">
+			<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="false" >
 				@forelse($list_peserta as $peserta)
 					<div class="kt-notes__items">
 						<div class="kt-notes__item" style="padding: 0 0 20px 45px;">
@@ -73,3 +75,10 @@
 		</div>
 	</div>
 </div>
+
+
+@push('bottom')
+	<script>
+
+	</script>
+@endpush

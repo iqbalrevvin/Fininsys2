@@ -15,12 +15,12 @@
 			$this->orderby = "id,asc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
-			$this->button_bulk_action = true;
+			$this->button_bulk_action = false;
 			$this->button_action_style = "button_icon";
 			$this->button_add = true;
-			$this->button_edit = true;
+			$this->button_edit = false;
 			$this->button_delete = true;
-			$this->button_detail = true;
+			$this->button_detail = false;
 			$this->button_show = false;
 			$this->button_filter = false;
 			$this->button_import = false;
@@ -37,7 +37,7 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|min:3|max:9|unique:tahun_ajaran','width'=>'col-sm-4','help'=>'Contoh:2019/2020','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
-			$this->form[] = ['label'=>'Status','name'=>'status','type'=>'select','width'=>'col-sm-2','dataenum'=>'Aktif'];
+			// $this->form[] = ['label'=>'Status','name'=>'status','type'=>'select','width'=>'col-sm-2','dataenum'=>'Aktif'];
 
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -73,7 +73,8 @@
 	        | 
 	        */
 	        $this->addaction = array();
-
+	        $this->addaction[] = ['label'=>'Set Aktif','url'=>CRUDBooster::mainpath('set-status/Aktif/[id]'),'icon'=>'fa fa-check','color'=>'success','showIf'=>"[status] == 'NonAktif'"];
+			$this->addaction[] = ['label'=>'NonAktif','url'=>CRUDBooster::mainpath('set-status/NonAktif/[id]'),'icon'=>'fa fa-ban','color'=>'warning','showIf'=>"[status] == 'Aktif'", 'confirmation' => false];
 
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -240,7 +241,9 @@
 	    |
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
-	    	//Your code here
+	    	if($column_index == 0) { 
+	    		$column_value = "<div style=''><b>$column_value</b></div>"; 
+	    	}
 	    }
 
 	    /*
@@ -263,7 +266,9 @@
 	    | 
 	    */
 	    public function hook_after_add($id) {        
-	        //Your code here
+	        DB::table('tahun_ajaran')
+	        	->where('id', $id)
+	        	->update(['status' => 'NonAktif']);
 
 	    }
 
@@ -321,6 +326,14 @@
 
 
 	    //By the way, you can still create your own method in here... :) 
+	    public function getSetStatus($status,$id) {
+	    	DB::table('tahun_ajaran')
+	        	->where('status', 'Aktif')
+	        	->update(['status' => 'NonAktif']);
+		   DB::table('tahun_ajaran')->where('id',$id)->update(['status'=>$status]);
 
+		   //This will redirect back and gives a message
+		   CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Tahun Ajaran Berhasil Diperbarui !","info");
+		}
 
 	}

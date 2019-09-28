@@ -52,7 +52,7 @@
             }
 
             @eval("if($query) {
-              echo \"<a class='btn btn-xs btn-\$color nav_block' title='\$title' onclick='\$confirm_box' href='\$url' target='\$target'><i class='\$icon'></i> $label</a>&nbsp;\";
+              echo \"<a class='btn btn-sm btn-\$color nav_block' title='\$title' onclick='\$confirm_box' href='\$url' target='\$target'><i class='\$icon'></i> $label</a>&nbsp;\";
           }");
         } else {
             echo "<a class='btn btn-xs btn-$color nav_block' title='$title' onclick='$confirm_box' href='$url' target='$target'><i class='$icon'></i> $label</a>&nbsp;";

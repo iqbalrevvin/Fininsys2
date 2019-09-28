@@ -13,7 +13,7 @@
 			$this->title_field = "id";
 			$this->limit = "20";
 			$this->orderby = "kelas_id,desc";
-			$this->orderby = "tahun_ajaran_id,desc";
+			$this->orderby = "nama,asc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -45,7 +45,7 @@
 			$this->form[] = ['label'=>'Nama Rombel','name'=>'nama','type'=>'text','validation'=>'required|max:191','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Kelas','name'=>'kelas_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-2','datatable'=>'kelas,nama'];
 			$this->form[] = ['label'=>'Wali Kelas','name'=>'tenpen_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-4','datatable'=>'tenpen,nama_lengkap'];
-			$this->form[] = ['label'=>'Tahun Ajaran','name'=>'tahun_ajaran_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-2','datatable'=>'tahun_ajaran,nama'];
+			// $this->form[] = ['label'=>'Tahun Ajaran','name'=>'tahun_ajaran_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-2','datatable'=>'tahun_ajaran,nama'];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'max:255','width'=>'col-sm-10'];
 
 			# END FORM DO NOT REMOVE THIS LINE
@@ -242,7 +242,7 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-	        //Your code here
+	        $query->where('tahun_ajaran_id',tapel_aktif()->id);
 	            
 	    }
 
@@ -279,6 +279,8 @@
 	        if($cekRombel){
 	        	DB::table('rombel')->where('id', $id)->delete();
 	        	CRUDBooster::redirect(CRUDBooster::mainpath(''),"Kelas & Tahun Ajaran Yang Ditambahkan Sudah Tersedia","warning");
+	        }else{
+	        	$postdata['tahun_ajaran_id'] = tapel_aktif()->id;
 	        }
 	    }
 
