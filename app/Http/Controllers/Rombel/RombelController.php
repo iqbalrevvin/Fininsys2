@@ -50,8 +50,8 @@ class RombelController extends Controller
 
     public function get_list_pesdik(DataTables $datatables, Request $request)
     {
-        $id = $request->input('id');
-        $students = Pesdik::with('tahun_ajaran')->select('pesdik.id', 'pesdik.nama_lengkap', 'pesdik.jenis_kelamin', 'pesdik.NIPD', 'pesdik.NISN', 'pesdik.tahun_ajaran_id')->where('status_pesdik_id', '1')->where('prodi_id', $id);
+        $id         = $request->input('id');
+        $students   = Pesdik::with('tahun_ajaran')->select('pesdik.id', 'pesdik.nama_lengkap', 'pesdik.jenis_kelamin', 'pesdik.NIPD', 'pesdik.NISN', 'pesdik.tahun_ajaran_id')->where('status_pesdik_id', '1')->where('prodi_id', $id);
         return $datatables->eloquent($students)
                 ->addColumn('checkbox', '<label class="kt-checkbox kt-checkbox--success"><input type="checkbox" name="student_checkbox[]" class="student_checkbox data-check" value="{{$id}}" /> Pilih<span></span></label>')
                 //->addColumn('nama', return $tahun_ajaran->nama);
@@ -83,7 +83,7 @@ class RombelController extends Controller
     {
         $idPesdik   = $request->input('id');
         $idRombel   = $request->input('rombel');
-        $pesdik = Pesdik::find($idPesdik);
+        $pesdik     = Pesdik::find($idPesdik);
         $pesdik->rombel()->detach($idRombel);
     }
 

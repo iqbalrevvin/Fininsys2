@@ -14,7 +14,7 @@
 			{{-- Kelola rombel adalah pengelolaan rombongan belajar siswa yang terdapat pada rombel 
 			<b>{{ $rombel->kelas->nama }}</b> Tahun Ajaran <b>{{ $rombel->tahun_ajaran->nama }}</b> --}}
 			Kelola Peserta Prakerin Periode {{ $master_prakerin->TahunAjaran->nama }}<br>
-			<small>Peserta Didik Program Studi <b>{{ $master_prakerin->rombel->kelas->nama }}</b> yang akan tampil pada penambahan peserta prakerin</small>
+			<small>Peserta Didik Rombel <b>{{ $master_prakerin->rombel->kelas->nama }}</b> yang akan tampil pada penambahan peserta prakerin</small>
 			<br>
 			<a href="{{ CRUDBooster::adminPath('prakerin_master') }}" class="nav_block">Kembali Ke Daftar Master Prakerin</a>
 		</div>
@@ -35,7 +35,9 @@
 							title="Tambahkan Instansi" data-toggle="modal" data-target="#add_tempat" data-backdrop="static">
 							<img src="{{ asset('metronic/media/icons/svg/Code/plus.svg') }}"/>
 						</button>
-						<button type="button" class="btn btn-outline-info btn-elevate btn-pill btn-elevate-air btn-circle btn-icon btn-sm">
+						<button type="button" 
+							class="btn btn-outline-info btn-elevate btn-pill btn-elevate-air btn-circle btn-icon btn-sm"
+							data-toggle="modal" data-target="#informasi_penempatan" title="Informasi Penempatan">
 							<img src="{{ asset('metronic/media/icons/svg/Code/Info-circle.svg') }}"/>
 						</button>
 						</div>
@@ -66,148 +68,25 @@
 			<!--end::Portlet-->
 		</div>
 	</div>
+	{{-- STAR::INFORMASI PENEMPATAN --}}
+		@include('prakerin.modal_informasi_penempatan')	
+	{{-- END::INFORMASI PENEMPATAN --}}
 	{{-- START::TAMBAH DATA INSTANSI --}}
-	<div class="modal fade" id="add_tempat" role="dialog" aria-labelledby="" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Tambah Tempat Prakerin</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="kt-portlet kt-portlet--responsive-mobile" id="kontenTambahSiswa">
-					<div class="insert_penempatan kt-portlet__body">
-						<form class="add_tempat kt-form kt-form--fit kt-form--label-right">
-							<input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">
-							<input type="hidden" name="master_id" id="master_id" value="{{ $master_prakerin->id }}">
-							<div class="form-group row">
-								<label class="col-form-label col-lg-3 col-sm-12">Instansi/DU/DI</label>
-								<div class=" col-lg-6 col-md-9 col-sm-12">
-									<select style='width:100%' class="form-control kt-select2" id="instansi" name="instansi">
-										<option value=""></option>
-										@forelse($instansi as $list)
-											<optgroup label="{{ kabupaten($list->kabupaten_id) }}">
-												@foreach($nama_instansi as $ins)
-													<option value="{{ $ins->id }}">{{ $ins->nama }}</option>
-												@endforeach
-											</optgroup>
-										@empty	
-											<optgroup label="Belum Terdapat Instansi Untuk Prakerin"></optgroup>	
-										@endforelse
-									</select>
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-form-label col-lg-3 col-sm-12">Pembimbing Lapangan</label>
-								<div class=" col-lg-6 col-md-9 col-sm-12">
-									<select style='width:100%' class="form-control kt-select2" id="pembimbing_lapangan" name="pembimbing_lapangan">
-									<option value=""></option>
-										@forelse($pembimbing_lapangan as $list)
-											<option value="{{ $list->id }}">{{ $list->nama }}</option>
-										@empty
-											<option value="">Belum Terdapat Pembimbing Lapangan</option>
-										@endforelse
-									</select>
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-form-label col-lg-3 col-sm-12">Pembimbing Akademik</label>
-								<div class=" col-lg-6 col-md-9 col-sm-12">
-									<select style='width:100%' class="form-control kt-select2" id="pembimbing_akademik" name="pembimbing_akademik">
-										<option></option>
-										@forelse($pembimbing_akademik as $list)
-											<option value="{{ $list->id }}">{{ $list->nama_lengkap }} | {{ $list->niy_nigk }}</option>
-										@empty
-											<option value="">Belum Ada Data Tenaga Pendidik</option>
-										@endforelse
-									</select>
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-form-label col-lg-3 col-sm-12">Tanggal Mulai Prakerin</label>
-								<div class=" col-lg-6 col-md-9 col-sm-12">
-									<input type='text' title="Tanggal Mulai Prakerin" class='form-control notfocus input_date' 
-										name="tanggal_mulai" id="tanggal_mulai" />
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-form-label col-lg-3 col-sm-12">Tanggal Selesai Prakerin</label>
-								<div class=" col-lg-6 col-md-9 col-sm-12">
-									<input type='text' title="Tanggal Mulai Prakerin" class='form-control notfocus input_date' 
-										name="tanggal_selesai" id="tanggal_selesai" />
-								</div>
-							</div>
-							<div class="col-lg-12 ml-lg-auto">
-								<button type="button" class="btn btn-success btn-elevate-hover btn-pill" id="insert_penempatan">
-									<i class="la la-save"></i> Simpan
-								</button>
-								<button type="reset" class="btn btn-dark btn-elevate-hover btn-pill" class="close" 
-										data-dismiss="modal" aria-label="Close">
-									Batal
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+		@include('prakerin.modal_add_penempatan')
 	{{-- END::TAMBAH DATA INSTANSI --}}
+
+	{{-- START::EDIT DATA INSTANSI --}}
+		@include('prakerin.modal_edit_penempatan')
+	{{-- END::EDIT DATA INSTANSI --}}
+	
 	{{-- STAR::DATA PILIH PESERTA PRAKERIN --}}	
-	<div class="modal fade" id="add_peserta_prakerin" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Data Rombel {{ $master_prakerin->rombel->kelas->nama }}</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="kt-portlet kt-portlet--responsive-mobile" id="konten_tambah_peserta">
-					<div class="kt-portlet__head">
-						<div class="kt-portlet__head-label">
-							<span class="kt-portlet__head-icon">
-								<i class="flaticon-users kt-font-success"></i>
-							</span>
-							<span class=" kt-font-warning">
-								Pilih Peserta Didik Lalu Klik <i class="la la-plus-square kt-font-success"></i>
-								<span class="kt-font-success">Tambahkan</span><br>
-								<small class="kt-font-dark">PD yang ditampilkan adalah PD bertatus aktif</small>
-							</span>
-						</div>
-						<div class="kt-portlet__head-toolbar">
-							<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-								<button type="button" class="btn btn-success" id="btn_tambah_peserta_prakerin">
-									<i class="la la-plus-square"></i>Tambahkan
-								</button>
-								<button type="button" class="btn btn-secondary" id="reloadTabelPilihPeserta">
-									<i class="la la-refresh"></i>Muat Ulang
-								</button>
-							</div>
-						</div>
-					</div>
-					<div class="kt-portlet__body">
-						<table class="table table-striped- table-bordered table-hover" id="tbl_pilih_peserta_prakerin">
-	                        <thead>
-	                            <tr>
-	                                <th>
-	                                    <label class="kt-checkbox kt-checkbox--bold kt-checkbox--success">
-	                                        <input type="checkbox" id="check-all">Semua
-	                                            <span></span>
-	                                    </label>
-	                                </th>
-	                                <th>NIPD</th>
-	                                <th>Nama Peserta Didik</th>
-	                                <th>Jenis Kelamin</th>
-	                            </tr>
-	                        </thead>
-	                    </table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>	
+		@include('prakerin.modal_add_peserta')	
 	{{-- END::DATA PILIH PESERTA PRAKERIN --}}
+
 @endsection
 
 @push('bottom')
+	
 	<script type="text/javascript">
 		$.ajaxSetup({
 	        headers: {
@@ -273,6 +152,7 @@
         jQuery(document).ready(function() {
         // START::OPERASI ---------------------------------------------------
         	show_instansi();
+
         	DatatablesBasicPaginations.init();
         	function show_instansi(){
         		var master_id = $('#master_id').val();
@@ -287,10 +167,10 @@
 			        success: function(response){
 			            $('#show_instansi').html(response);
 			            $('#count_instansi').load('{{ url('admin/prakerin/count-instansi/'.$master_prakerin->id) }}');
+			            // $('.kt-select2').select2();
 			        }
 			    });
         	}
-
 	        $('#insert_penempatan').on('click', function() {
 	        	var master_id 			= $('#master_id').val();
 	        	var instansi 			= $('#instansi').val();
@@ -340,7 +220,6 @@
 			                  	// window.location = "/userData";
 			                  	// alert(response.pesan);
 			                  	$('#add_tempat').modal('hide');
-			                   	$('#modalwindow').modal('hide');
 			                  	KTApp.unblock('.insert_penempatan');
 			                  	toastr.success(response.message, response.title);
 			                  	$(".add_tempat").trigger("reset");	
@@ -354,7 +233,11 @@
 			                  	$(".add_tempat").trigger("reset");	
 			                  	show_instansi()	
 			                }       
-			            }
+			            },
+			            error: function (jqXHR, textStatus, errorThrown){
+					        swal.fire("Gagal Memperbarui", "Gagal dalam memproses data, coba untuk muat ulang halaman atau hubungi pihak pengembang", "warning");
+					        KTApp.unblock('.insert_penempatan');
+					    }
 			        });
 	        	} 	
 	        });
@@ -398,7 +281,11 @@
 			                  	show_instansi()
 			                  	$('#konten_list_peserta').fadeOut("slow");
 			                  	$('#load_list_peserta').show().html('<b id="loader-center">Silahkan Pilih Kembali Instansi</b>');
-				      		}
+				      		},
+				      		error: function (jqXHR, textStatus, errorThrown){
+					        	swal.fire("Gagal Memperbarui", "Gagal dalam memproses data, coba untuk muat ulang halaman atau hubungi pihak pengembang", "warning");
+					        	KTApp.unblock('.data-instansi');
+					    	}
 				      	})
 	      			}
 	    		});
@@ -423,7 +310,11 @@
 			        	$('#konten_list_peserta').fadeIn("slow").html(response);
 			        	$('#load_list_peserta').hide();
 		              	//$("#jenisNasabah").selectpicker();
-		        	}
+		        	},
+		        	error: function (jqXHR, textStatus, errorThrown){
+			        	swal.fire("Gagal Memperbarui", "Gagal dalam memproses data, coba untuk muat ulang halaman atau hubungi pihak pengembang", "warning");
+			    	}
+
 	      		});	
 			});
 
@@ -440,7 +331,7 @@
 				        text: +list_id.length+" Peserta Didik Akan Didaftarkan Sebagai Peserta Prakerin Di "+nama_instansi,
 				        type: "info",
 				        showCancelButton: true,
-				        confirmButtonColor: "#DD6B55",
+				        confirmButtonColor: "#008B8B",
 				        confirmButtonText: "Ya, Lanjutkan!",
 				        cancelButtonText: "Tidak, Kembali!",
 		    		}).then((result) => {
@@ -480,6 +371,141 @@
 		    	}else{
 		    		toastr.error("Pilih Terlebih Dahulu Peserta Didik Yang Akan Didaftarkan Ke "+nama_instansi, "Pilih Siswa!");
 		    	}
+			});
+
+			$(document).on('click', '.hapus_peserta', function() {
+				var id 				= $(this).data('id');
+				var penempatan_id 	= $('#penempatan_id').val();
+	    		var nama_peserta 	= $(this).data('nama');
+	    		swal.fire({
+			        title: "KONFIRMASI TINDAKAN!",
+			        text: "PD Atas Nama "+nama_peserta+" Akan Dihapus Dari Instansi",
+			        type: "warning",
+			        showCancelButton: true,
+			        confirmButtonColor: "#DD6B55",
+			        confirmButtonText: "Ya, Lanjutkan!",
+			        cancelButtonText: "Tidak, Kembali!",
+	    		}).then((result) => {
+	      			if(result.value) {
+				      	KTApp.block('.data_peserta', {
+		                	overlayColor: '#000000',
+		                	type: 'v2',
+		                	state: 'danger',
+		                	message: '<b>Menghapus Peserta Bernama '+nama_peserta+'...</b>'
+		            	});	
+	        			$.ajax({
+				      		url: '{{ route('prakerin.delete_peserta') }}',
+				      		type: 'GET',
+				      		data: {
+				      			peserta_id 			: id,
+				      			penempatan_id 		: penempatan_id,
+				           	},
+				           	dataType: 'json',
+				            beforeSend: function(e) {
+								if(e && e.overrideMimeType) {
+									e.overrideMimeType('application/jsoncharset=UTF-8')
+								}
+							},
+				      		success: function(response){
+				      			KTApp.unblock('.data_peserta');
+			                  	toastr.success(response.message, response.title);
+			                  	$(".add_tempat").trigger("reset");	
+			                  	$("div[data-id='"+id+"']").fadeOut("slow",function(){
+								    $(this).remove();
+							     });
+			                  	tabel.ajax.reload(null,false);
+			                  	$('#count_peserta').load('{{ url('admin/prakerin/count-peserta/') }}/'+penempatan_id);
+			                  	// $('#konten_list_peserta').fadeOut("slow");
+			                  	// $('#load_list_peserta').show().html('<b id="loader-center">Silahkan Pilih Kembali Instansi</b>');
+				      		},
+				      		error: function (jqXHR, textStatus, errorThrown){
+					        	swal.fire("Gagal Memperbarui", "Gagal dalam memproses data, coba untuk muat ulang halaman atau hubungi pihak pengembang", "warning");
+					        	KTApp.unblock('.data_peserta');
+					    	}
+				      	})
+	      			}
+	    		});
+			});
+
+			$(document).on('click', '#edit_penempatan', function() {
+				var penempatan_id 		= $(this).data('id');
+    			$.ajax({
+		      		url: '{{ route('prakerin.edit_penempatan') }}',
+		      		type: 'GET',
+		      		data: {
+		      			penempatan_id 		: penempatan_id,
+		           	},
+		           	dataType: 'json',
+		            beforeSend: function(e) {
+						if(e && e.overrideMimeType) {
+							e.overrideMimeType('application/jsoncharset=UTF-8')
+						}
+					},
+		      		success: function(data){
+		      			$('#edit_tempat').modal('show');
+		      			$('#simpan_edit_penempatan').val(data.penempatan_id);
+		      			$('#data_instansi').html(data.nama_instansi);
+		      			$('#data_pembimbing').html(data.nama_pembimbing);
+		      			$('#data_pembimbing_akademik').html(data.nama_pembimbing_akademik);
+		      			$('#edit_tanggal_mulai').val(data.tanggal_mulai);
+		      			$('#edit_tanggal_selesai').val(data.tanggal_selesai);
+		      		}
+		      	})	
+			});
+
+			$(document).on('click', '#simpan_edit_penempatan', function() {
+				var master_id 					= $('#master_id').val();
+				var penempatan_id 				= $(this).val();
+				var edit_instansi 				= $('#edit_instansi').val();
+				var edit_pembimbing_lapangan	= $('#edit_pembimbing_lapangan').val();
+				var edit_pembimbing_akademik 	= $('#edit_pembimbing_akademik').val();
+				var edit_tanggal_mulai 			= $('#edit_tanggal_mulai').val();
+				var edit_tanggal_selesai 		= $('#edit_tanggal_selesai').val();
+				if(edit_tanggal_mulai=="" || edit_tanggal_selesai==""){
+					toastr.error("Pastikan Parameter Tanggal Mulai & Tanggal Selesai Tidak Kosong", "Parameter Harus Lengkap");
+				}else{
+					KTApp.block('.edit_penempatan', {
+	                	overlayColor: '#000000',
+	                	type: 'v2',
+	                	state: 'success',
+	                	message: 'Memeriksa & Mengirim Parameter. . .'
+	            	});
+				
+					$.ajax({
+			      		url: '{{ route('prakerin.simpan_edit_penempatan') }}',
+			      		type: 'GET',
+			      		data: {
+			      			master_id	 				: master_id,
+			      			penempatan_id 				: penempatan_id,
+			      			edit_instansi 				: edit_instansi,
+			      			edit_pembimbing_lapangan 	: edit_pembimbing_lapangan,
+			      			edit_pembimbing_akademik 	: edit_pembimbing_akademik,
+			      			edit_tanggal_mulai 			: edit_tanggal_mulai,
+			      			edit_tanggal_selesai 		: edit_tanggal_selesai
+			           	},
+			           	dataType: 'json',
+			            beforeSend: function(e) {
+							if(e && e.overrideMimeType) {
+								e.overrideMimeType('application/jsoncharset=UTF-8')
+							}
+						},
+			      		success: function(response){
+			      				if(response.status == 'success'){
+			      					toastr.success(response.message, response.title);
+			      					KTApp.unblock('.edit_penempatan');
+			      					$('#edit_tempat').modal('hide');
+			      					show_instansi()	
+			      				}else{
+			      					toastr.error(response.message, response.title);
+			      				}
+			      				
+			      		},
+			      		error: function (jqXHR, textStatus, errorThrown){
+					        swal.fire("Gagal Memperbarui", "Gagal dalam memproses data, coba untuk muat ulang halaman atau hubungi pihak pengembang", "warning");
+					        KTApp.unblock('.edit_penempatan');
+					    }
+			      	})
+				}
 			});
         	// END::OPERASI -----------------------------------------------------
         }); //JQUERY DOCUMENT READY

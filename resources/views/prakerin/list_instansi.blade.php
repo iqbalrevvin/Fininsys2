@@ -29,13 +29,14 @@
 						<div class="dropdown-menu dropdown-menu-right">
 							<ul class="kt-nav">
 								<li class="kt-nav__item">
-									<a href="#" data-id="{{ $list->id }}" data-nama="{{ $list->instansi->nama }}" class="hapus_instansi kt-nav__link">
+									<a href="#" data-id="{{ $list->id }}" data-nama="{{ $list->instansi->nama }}" 
+										class="hapus_instansi kt-nav__link">
 										<i class="kt-nav__link-icon flaticon2-trash"></i>
 										<span class="kt-nav__link-text">Hapus</span>
 									</a>
 								</li>
 								<li class="kt-nav__item">
-									<a href="#" class="kt-nav__link">
+									<a href="#" class="kt-nav__link" id="edit_penempatan" data-id="{{ $list->id }}">
 										<i class="kt-nav__link-icon flaticon2-edit"></i>
 										<span class="kt-nav__link-text">Edit</span>
 									</a>
@@ -54,6 +55,15 @@
 			</div>
 		</div>
 	</div>
+	{{-- START::EDIT DATA INSTANSI --}}
+	
+	{{-- END::EDIT DATA INSTANSI --}}
 @empty
 	{{-- empty expr --}}
 @endforelse
+<script src="{{ asset('metronic/js/pages/crud/forms/widgets/select2.js') }}" type="text/javascript"></script>
+@push('bottom')
+	
+
+	
+@endpush

@@ -4,7 +4,8 @@
 	<div class="kt-portlet__head">
 		<div class="kt-portlet__head-label">
 			<span class="kt-portlet__head-icon"><i class="flaticon-users kt-font-success"></i></span>
-			<h3 class="kt-portlet__head-title kt-font-success">{{ $nama_instansi }}</h3> &nbsp; <small>({{ $list_peserta->count() }} Peserta)</small>
+			<h3 class="kt-portlet__head-title kt-font-success">{{ $nama_instansi }}</h3> &nbsp; 
+			(<span id="count_peserta">{{ $list_peserta->count() }}</span>&nbsp;Peserta)
 		</div>
 		<div class="kt-portlet__head-toolbar">
 			<div class="kt-portlet__head-actions">
@@ -19,11 +20,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="kt-portlet__body">
+	<div class="kt-portlet__body data_peserta">
 		<div class="kt-portlet__content">
 			<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="false" >
 				@forelse($list_peserta as $peserta)
-					<div class="kt-notes__items">
+					<div data-id="{{ $peserta->id }}" id="peserta{{ $peserta->id }}" class="kt-notes__items">
 						<div class="kt-notes__item" style="padding: 0 0 20px 45px;">
 							<div class="kt-notes__media">
 								@if($peserta->foto == NULL)
@@ -53,7 +54,8 @@
 										<div class="dropdown-menu dropdown-menu-right">
 											<ul class="kt-nav">
 												<li class="kt-nav__item">
-													<a href="#" class="kt-nav__link">
+													<a href="#" data-id="{{ $peserta->id }}" data-nama="{{ $peserta->nama_lengkap }}" 
+														class="hapus_peserta kt-nav__link">
 														<i class="kt-nav__link-icon flaticon2-trash"></i>
 														<span class="kt-nav__link-text">Hapus</span>
 													</a>

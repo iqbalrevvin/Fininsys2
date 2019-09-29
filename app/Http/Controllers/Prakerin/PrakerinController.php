@@ -25,6 +25,12 @@ class PrakerinController extends Controller
         $count = Penempatan::where('prakerin_master_id', $id)->count();
         return $count;
     }
+    public function count_peserta($id)
+    {
+        $count = Penempatan::find($id)->pesdik()->count();
+
+        return $count;
+    }
 
     public function peserta(Request $request, $id)
     {
@@ -53,8 +59,17 @@ class PrakerinController extends Controller
     {
     	$master_prakerin_id 	= $request->input('master_id');
     	$list_instansi 		 	= Penempatan::where('prakerin_master_id', $master_prakerin_id)->get();
+        $instansi               = Instansi::select('prakerin_instansi.kabupaten_id')
+                                        ->orderBy('prakerin_instansi.kabupaten_id')
+                                        ->groupBy('prakerin_instansi.kabupaten_id')
+                                        ->get();
+        foreach($instansi as $list){
+            $nama_instansi = Instansi::where('kabupaten_id', $list->kabupaten_id)->get();
+        }
+        $pembimbing_lapangan = PembimbingLapangan::All();
+        $pembimbing_akademik = Tenpen::All();
         
-    	return view('prakerin.list_instansi', compact('list_instansi'));
+    	return view('prakerin.list_instansi', compact('list_instansi', 'instansi', 'nama_instansi', 'pembimbing_lapangan', 'pembimbing_akademik', 'master_prakerin_id'));
     }
 
     public function get_list_peserta(Request $request)
@@ -96,6 +111,62 @@ class PrakerinController extends Controller
     	echo json_encode($callback);
     }
 
+    public function edit_penempatan(Request $request)
+    {
+        $penempatan_id      = $request->input('penempatan_id');
+        $penempatan         = Penempatan::find($penempatan_id);
+         $callback = [
+                    'penempatan_id'             => $penempatan_id,
+                    'instansi_id'               => $penempatan->instansi_id, 
+                    'nama_instansi'             => $penempatan->instansi->nama,
+                    'pembimbing_id'             => $penempatan->pembimbing_lapangan->id,
+                    'nama_pembimbing'           => $penempatan->pembimbing_lapangan->nama,
+                    'pembimbing_akademik_id'    => $penempatan->tenpen->id,
+                    'nama_pembimbing_akademik'  => $penempatan->tenpen->nama_lengkap,
+                    'tanggal_mulai'             => $penempatan->tgl_mulai, 
+                    'tanggal_selesai'           => $penempatan->tgl_selesai, 
+                    'status'                    => 'success',
+                    'title'                     => 'Penambahan Data Berhasil',
+                    'message'                   => 'Penempatan Prakerin Berhasil Ditambahkan' 
+            ];                            
+        
+        echo json_encode($callback);
+    }
+
+    public function simpan_edit_penempatan(Request $request)
+    {
+        $master_id                  = $request->input('master_id');
+        $penempatan_id              = $request->input('penempatan_id');
+        $edit_instansi              = $request->input('edit_instansi');
+        $edit_pembimbing_lapangan   = $request->input('edit_pembimbing_lapangan');
+        $edit_pembimbing_akademik   = $request->input('edit_pembimbing_akademik');
+        $edit_tanggal_mulai         = $request->input('edit_tanggal_mulai');
+        $edit_tanggal_selesai       = $request->input('edit_tanggal_selesai');
+
+
+        $penempatan = Penempatan::find($penempatan_id);
+     
+        if($edit_pembimbing_lapangan != '')
+        {
+            $penempatan->pembimbing_lapangan_id = $edit_pembimbing_lapangan;
+        }
+        if($edit_pembimbing_akademik != '')
+        {
+            $penempatan->tenpen_id = $edit_pembimbing_akademik;
+        }
+        $penempatan->tgl_mulai = $edit_tanggal_mulai;
+        $penempatan->tgl_selesai = $edit_tanggal_selesai;
+        $penempatan->save();
+
+        $callback = [
+            'status'    => 'success',
+            'title'     => 'Instansi Berhasil Diperbarui',
+            'message'   => 'Data Instansi Berhasil Diperbarui'
+        ];
+
+        echo json_encode($callback);
+    }
+
     public function delete_instansi(Request $request)
     {
         $penempatan_id  = $request->input('penempatan_id');
@@ -132,13 +203,11 @@ class PrakerinController extends Controller
                 $list = [];
             }
             
-            $pesdik     = Rombel::find($rombel_id)->pesdik()->select('*', 'pesdik.id as pesdikid')->whereNotIn('pesdik_id', $list);
+            $pesdik = Rombel::find($rombel_id)->pesdik()->select('*', 'pesdik.id as pesdikid')->whereNotIn('pesdik_id', $list);
         }else{
-            $pesdik     = Rombel::find($rombel_id)->pesdik()->select('*', 'pesdik.id as pesdikid');
+            $pesdik = Rombel::find($rombel_id)->pesdik()->select('*', 'pesdik.id as pesdikid');
         }
         
-        
-
         // $students = Pesdik::select('pesdik.id', 'pesdik.nama_lengkap', 'pesdik.jenis_kelamin', 'pesdik.NIPD', 'pesdik.NISN')
         //                   ->where('status_pesdik_id', '1');
         
@@ -162,5 +231,22 @@ class PrakerinController extends Controller
                 $penempatan->pesdik()->attach($list);
             }
         }
+    }
+
+    public function delete_peserta(Request $request)
+    {
+        $peserta_id         = $request->input('peserta_id');
+        $penempetan_id      = $request->input('penempatan_id');
+        $pesdik = Pesdik::find($peserta_id);
+
+        $pesdik->penempatan()->detach($penempatan_id);
+
+        $callback = [
+            'status'    => 'success',
+            'title'     => 'Hapus Peserta Berhasil',
+            'message'   => 'Peserta berhasil dihapus dari peserta instansi' 
+        ];
+
+        echo json_encode($callback);
     }
 }
