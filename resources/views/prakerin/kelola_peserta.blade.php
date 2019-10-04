@@ -71,6 +71,11 @@
 	{{-- STAR::INFORMASI PENEMPATAN --}}
 		@include('prakerin.modal_informasi_penempatan')	
 	{{-- END::INFORMASI PENEMPATAN --}}
+
+	{{-- STAR::DATA PILIH PESERTA PRAKERIN --}}	
+		@include('prakerin.modal_informasi_peserta_prakerin')	
+	{{-- END::DATA PILIH PESERTA PRAKERIN --}}
+
 	{{-- START::TAMBAH DATA INSTANSI --}}
 		@include('prakerin.modal_add_penempatan')
 	{{-- END::TAMBAH DATA INSTANSI --}}

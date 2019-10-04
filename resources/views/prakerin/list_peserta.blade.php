@@ -14,7 +14,7 @@
 				<img src="{{ asset('metronic/media/icons/svg/Communication/Add-user.svg') }}"/>
 			</button>
 			<button type="button" class="btn btn-outline-info btn-elevate btn-pill btn-elevate-air btn-circle btn-icon btn-sm"
-				title="Informasi">
+				title="Informasi Peserta" data-toggle="modal" data-target="#informasi_peserta">
 				<img src="{{ asset('metronic/media/icons/svg/Code/Info-circle.svg') }}"/>
 			</button>
 			</div>

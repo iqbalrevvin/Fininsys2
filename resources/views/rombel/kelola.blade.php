@@ -311,7 +311,6 @@
 			}
 			$(document).on('click', '#reloadTabel', function(e) {
         		kontenView().load();
-        		
     		});
     		$("#check-all").click(function () {
 			    $(".data-check").prop('checked', $(this).prop('checked'));

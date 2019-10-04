@@ -45,6 +45,7 @@
         <!--begin::Page Vendors Styles(used by this page) -->
         {{-- <link href="{{ asset('metronic/vendors/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" /> --}}
         <!--end::Page Vendors Styles -->
+        <link href="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 
         <!--begin:: Global Mandatory Vendors -->
         <link href="{{ asset('metronic/vendors/general/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" type="text/css" />
@@ -286,7 +287,7 @@
         <!--end::Global Theme Bundle -->
 
         <!--begin::Page Vendors(used by this page) -->
-
+            <script src="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
         <!--end::Page Vendors -->
 
         <!--begin::Page Scripts(used by this page) -->

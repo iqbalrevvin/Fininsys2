@@ -5,7 +5,7 @@ namespace App\Http\Controllers\PesertaDidik;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Pesdik;
-
+use Yajra\DataTables\DataTables;
 class PesertaDidikController extends Controller
 {
     public function index(Request $request)
@@ -34,5 +34,16 @@ class PesertaDidikController extends Controller
         $page_title = $pesdik->nama_lengkap;
         $riwayat_kelas = Pesdik::find($pesdik->id)->rombel()->get();
         return view('pesdik.profil',compact('page_title', 'pesdik', 'riwayat_kelas'));
+    }
+    public function import()
+    {
+        $page_title = 'Import Data Peserta Didik';
+        return view('pesdik.import', compact('page_title'));
+    }
+
+    public function get_data_pesdik_import(DataTables $datatables)
+    {
+        $pesdik   = Pesdik::with('tahun_ajaran')->select('pesdik.id', 'pesdik.NIK', 'pesdik.nama_lengkap', 'pesdik.jenis_kelamin', 'pesdik.NIPD', 'pesdik.NISN', 'pesdik.created_at', 'pesdik.tahun_ajaran_id')->orderBy('created_at', 'desc');
+        return $datatables->eloquent($pesdik)->make(true);
     }
 }

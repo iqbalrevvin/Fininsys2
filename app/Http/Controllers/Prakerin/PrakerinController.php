@@ -115,7 +115,7 @@ class PrakerinController extends Controller
     {
         $penempatan_id      = $request->input('penempatan_id');
         $penempatan         = Penempatan::find($penempatan_id);
-         $callback = [
+         $callback = collect([
                     'penempatan_id'             => $penempatan_id,
                     'instansi_id'               => $penempatan->instansi_id, 
                     'nama_instansi'             => $penempatan->instansi->nama,
@@ -128,9 +128,10 @@ class PrakerinController extends Controller
                     'status'                    => 'success',
                     'title'                     => 'Penambahan Data Berhasil',
                     'message'                   => 'Penempatan Prakerin Berhasil Ditambahkan' 
-            ];                            
+            ]);                            
         
-        echo json_encode($callback);
+        // echo json_encode($callback);
+        return $callback->toJson();
     }
 
     public function simpan_edit_penempatan(Request $request)
@@ -158,13 +159,14 @@ class PrakerinController extends Controller
         $penempatan->tgl_selesai = $edit_tanggal_selesai;
         $penempatan->save();
 
-        $callback = [
+        $callback = collect([
             'status'    => 'success',
             'title'     => 'Instansi Berhasil Diperbarui',
             'message'   => 'Data Instansi Berhasil Diperbarui'
-        ];
+        ]);
 
-        echo json_encode($callback);
+        // echo json_encode($callback);
+        return $callback->toJson();
     }
 
     public function delete_instansi(Request $request)
@@ -173,13 +175,14 @@ class PrakerinController extends Controller
 
         $penempatan     = Penempatan::find($penempatan_id);
         $penempatan->delete();
-        $callback = [
+        $callback = collect([
             'status'    => 'success',
             'title'     => 'Hapus Instansi Berhasil',
             'message'   => 'instansi beserta peserta terkait berhasil dihapus' 
-        ];
+        ]);
 
-        echo json_encode($callback);
+        // echo json_encode($callback);
+        return $callback->toJson();
     }
 
     public function get_list_pilih_peserta(DataTables $datatables, Request $request)
@@ -203,7 +206,9 @@ class PrakerinController extends Controller
                 $list = [];
             }
             
-            $pesdik = Rombel::find($rombel_id)->pesdik()->select('*', 'pesdik.id as pesdikid')->whereNotIn('pesdik_id', $list);
+            $pesdik = Rombel::find($rombel_id)->pesdik()->select('*', 'pesdik.id as pesdikid')
+                           ->whereNotIn('pesdik_id', $list)
+                           ->where('pesdik.status_pesdik_id', 1);
         }else{
             $pesdik = Rombel::find($rombel_id)->pesdik()->select('*', 'pesdik.id as pesdikid');
         }
@@ -241,12 +246,13 @@ class PrakerinController extends Controller
 
         $pesdik->penempatan()->detach($penempatan_id);
 
-        $callback = [
+        $callback = collect([
             'status'    => 'success',
             'title'     => 'Hapus Peserta Berhasil',
             'message'   => 'Peserta berhasil dihapus dari peserta instansi' 
-        ];
+        ]);
 
-        echo json_encode($callback);
+        // echo json_encode($callback);
+        return $callback->toJson();
     }
 }

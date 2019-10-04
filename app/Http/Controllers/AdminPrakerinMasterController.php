@@ -33,6 +33,7 @@
 			$this->col[] = ["label"=>"Nama Master","name"=>"nama"];
 			$this->col[] = ["label"=>"Tahun Ajaran","name"=>"tahun_ajaran_id","join"=>"tahun_ajaran,nama"];
 			$this->col[] = ["label"=>"Rombel","name"=>"rombel_id","join"=>"rombel,nama"];
+			$this->col[] = ["label"=>"Jumlah Instansi","name"=>"(select count(prakerin_penempatan.id) from prakerin_penempatan where prakerin_penempatan.prakerin_master_id = prakerin_master.id) as total_penempatan"];
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -40,7 +41,7 @@
 			$this->form = [];
 			$tapel = tapel_aktif();
 			$this->form[] = ['label'=>'Nama Master','name'=>'nama','type'=>'text','validation'=>'required','width'=>'col-sm-5'];
-			$this->form[] = ['label'=>'Tahun Ajaran','name'=>'tahun_ajaran_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-4','datatable'=>'tahun_ajaran,nama'];
+			// $this->form[] = ['label'=>'Tahun Ajaran','name'=>'tahun_ajaran_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-4','datatable'=>'tahun_ajaran,nama'];
 			$this->form[] = ['label'=>'Rombel','name'=>'rombel_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-5','datatable'=>'rombel,nama', 'help'=>'Rombongan Belajar Tahun Ajaran '.$tapel->nama, 'datatable_where'=>'tahun_ajaran_id = '.$tapel->id];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
@@ -239,7 +240,7 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-	        //Your code here
+	        $query->where('prakerin_master.tahun_ajaran_id',tapel_aktif()->id);
 	            
 	    }
 
@@ -253,6 +254,9 @@
 	    	if ($column_index == 1) {
 	    		$column_value = "<div style='text-align:center'><b>$column_value</b></div>"; 
 	    	}
+	    	if($column_index == 4){
+	    		$column_value = "<div style='text-align:center'><b>$column_value</b></div>"; 
+	    	}
 	    }
 
 	    /*
@@ -263,7 +267,17 @@
 	    |
 	    */
 	    public function hook_before_add(&$postdata) {        
-	        //Your code here
+	        $rombelID 	= $postdata['rombel_id'];
+	        $tahunID 	= tapel_aktif()->id;
+	         $cekRombel = DB::table('prakerin_master')
+	        				->where('rombel_id', $rombelID)
+	        				->where('tahun_ajaran_id', $tahunID)
+	        				->exists();
+	        if($cekRombel){
+	        	CRUDBooster::redirect(CRUDBooster::adminPath('prakerin_master'),"Rombel & Tahun Ajaran Yang Ditambahkan Sudah Tersedia","warning");
+	        }else{
+	        	$postdata['tahun_ajaran_id'] = tapel_aktif()->id;
+	        }
 
 	    }
 
@@ -288,7 +302,20 @@
 	    | 
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
-	        //Your code here
+	        $dataPrakerin 	= DB::table('prakerin_master')->where('id', $id)->first();
+	    	$dataNamaMaster = $dataPrakerin->nama;
+	    	$dataKeterangan = $dataPrakerin->keterangan;
+	    	if($postdata['nama'] == $dataNamaMaster AND $postdata['keterangan'] == $dataKeterangan){
+	    		$rombelID 	= $postdata['rombel_id'];
+		        $tahunID 	= tapel_aktif()->id;
+		        $cekRombel = DB::table('prakerin_master')
+		        				->where('rombel_id', $rombelID)
+		        				->where('tahun_ajaran_id', $tahunID)
+		        				->exists();
+		        if($cekRombel){
+		        	CRUDBooster::redirect(CRUDBooster::adminPath('prakerin_master'),"Rombel & Tahun Ajaran Yang Diperbarui Sudah Tersedia","warning");
+		        }
+	    	}
 
 	    }
 
@@ -312,7 +339,10 @@
 	    | 
 	    */
 	    public function hook_before_delete($id) {
-	        //Your code here
+	        $cekPenempatan = DB::table('prakerin_penempatan')->where('prakerin_master_id', $id)->exists();
+	       if($cekPenempatan) {
+	       		CRUDBooster::redirect(CRUDBooster::adminPath('prakerin_master'),"Master Prakerin Berisi Data Instansi Tidak Dapat Dihapus!","danger");
+	       }
 
 	    }
 

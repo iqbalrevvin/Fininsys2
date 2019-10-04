@@ -271,14 +271,14 @@
 	    public function hook_before_add(&$postdata) {        
 	        //$cekRombel 	= DB::table('rombel')->where('id', $id)->first();
 	        $kelasID 	= $postdata['kelas_id'];
-	        $tahunID 	= $postdata['tahun_ajaran_id'];
+	        $tahunID 	= tapel_aktif()->id;
 	        $cekRombel = DB::table('rombel')
 	        				->where('kelas_id', $kelasID)
 	        				->where('tahun_ajaran_id', $tahunID)
 	        				->exists();
 	        if($cekRombel){
-	        	DB::table('rombel')->where('id', $id)->delete();
-	        	CRUDBooster::redirect(CRUDBooster::mainpath(''),"Kelas & Tahun Ajaran Yang Ditambahkan Sudah Tersedia","warning");
+	        	//DB::table('rombel')->where('id', $id)->delete();
+	        	CRUDBooster::redirect(CRUDBooster::adminPath('rombel'),"Kelas & Tahun Ajaran Yang Ditambahkan Sudah Tersedia","warning");
 	        }else{
 	        	$postdata['tahun_ajaran_id'] = tapel_aktif()->id;
 	        }
@@ -292,7 +292,7 @@
 	    | 
 	    */
 	    public function hook_after_add($id) {        
-
+	    	
 	    }
 
 	    /* 
@@ -303,16 +303,22 @@
 	    | @id       = current id 
 	    | 
 	    */
-	    public function hook_before_edit(&$postdata,$id) {        
-	        $kelasID 	= $postdata['kelas_id'];
-	        $tahunID 	= $postdata['tahun_ajaran_id'];
-	        $cekRombel = DB::table('rombel')
-	        				->where('kelas_id', $kelasID)
-	        				->where('tahun_ajaran_id', $tahunID)
-	        				->exists();
-	        if($cekRombel){
-	        	CRUDBooster::redirect(CRUDBooster::mainpath(''),"Kelas & Tahun Ajaran Yang Ditambahkan Sudah Tersedia","warning");
-	        }
+	    public function hook_before_edit(&$postdata,$id) {     
+	    	$dataRombel 	= DB::table('rombel')->where('id', $id)->first();
+	    	$dataNamaRombel = $dataRombel->nama;
+	    	$dataKeterangan = $dataRombel->keterangan;
+	    	if($postdata['nama'] == $dataNamaRombel AND $postdata['keterangan'] == $dataKeterangan){
+	    		$kelasID 	= $postdata['kelas_id'];
+		        $tahunID 	= tapel_aktif()->id;
+		        $cekRombel = DB::table('rombel')
+		        				->where('kelas_id', $kelasID)
+		        				->where('tahun_ajaran_id', $tahunID)
+		        				->exists();
+		        if($cekRombel){
+		        	CRUDBooster::redirect(CRUDBooster::adminPath('rombel'),"Kelas & Tahun Ajaran Yang Diperbarui Sudah Tersedia","warning");
+		        }
+	    	}
+	        
 
 	    }
 
@@ -338,7 +344,7 @@
 	    public function hook_before_delete($id) {
 	       $cekPeserta = DB::table('pesdik_rombel')->select('pesdik_id')->where('rombel_id', $id)->exists();
 	       if($cekPeserta) {
-	       		CRUDBooster::redirect(CRUDBooster::mainpath(''),"Rombel Berisi Peserta Didik Tidak Dapat Dihapus!","danger");
+	       		CRUDBooster::redirect(CRUDBooster::adminPath('rombel'),"Rombel Berisi Peserta Didik Tidak Dapat Dihapus!","danger");
 	       }
 	    }
 

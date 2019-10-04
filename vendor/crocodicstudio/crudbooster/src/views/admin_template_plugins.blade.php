@@ -42,8 +42,8 @@
 <!--CRUDBOOSTER-->
 
 <!--DATATABLE BUNDLE-->
-<link href="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-<script src="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
+
+
 <!--DATATABLE BUNDLE-->
 
 <!--SWEET ALERT-->
