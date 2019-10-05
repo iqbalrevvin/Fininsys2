@@ -695,6 +695,7 @@ class ComposerStaticInite8e0d0fbf57da80c8ecc75ed136dd072
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Imports\\PesdikImport' => __DIR__ . '/../..' . '/app/Imports/PesdikImport.php',
         'App\\Models\\Kelas' => __DIR__ . '/../..' . '/app/Models/Kelas.php',
         'App\\Models\\Pesdik' => __DIR__ . '/../..' . '/app/Models/Pesdik.php',
         'App\\Models\\Prakerin\\BidangUsaha' => __DIR__ . '/../..' . '/app/Models/Prakerin/BidangUsaha.php',

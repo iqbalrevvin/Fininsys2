@@ -33,8 +33,39 @@
 				</div>
 
 				<!--begin::Form-->
-				<form class="kt-form">
+				<form class="kt-form" action="{{ url('admin/peserta-didik/proses_import') }}" 
+					method="post" enctype="multipart/form-data">
+					@csrf
 					<div class="kt-portlet__body">
+						@if( Session::has('success'))
+							<div class="alert alert-solid-success alert-bold" role="alert">
+								<div class="alert-text">{{ Session::get('success') }}</div>
+							</div>
+						@endif
+
+						@if(Session::has('error'))
+							<div class="alert alert-solid-danger alert-bold" role="alert">
+								<div class="alert-text">{{ Session::get('error') }}</div>
+							</div>
+						@endif
+
+						{{-- @if (count($errors) > 0)
+							<div class="alert alert-solid-success alert-bold" role="alert">
+								<div class="alert-text">{{ $error }}</div>
+							</div>
+						@endif --}}
+
+
+						{{-- @if (session('success'))
+                            <div class="alert alert-solid-success alert-bold" role="alert">
+								<div class="alert-text">{{ session('success') }}</div>
+							</div>
+                        @endif
+						@if (session('error'))
+                            <div class="alert alert-solid-danger alert-bold" role="alert">
+								<div class="alert-text">{{ session('error') }}</div>
+							</div>
+                        @endif --}}
 
 						<div class="form-group">
 							<label>File Import</label>
@@ -43,9 +74,18 @@
 								<input type="file" class="custom-file-input" name="file_import">
 								<label class="custom-file-label" for="customFile">Pilih Berkas</label>
 							</div>
+							@if($errors->first('file_import'))
+								<b class="text-danger">{{ $errors->first('file_import') }}</b>
+							@endif
+						</div>
+						<div class="form-group">
+							<div class="custom-file">
+								<button type="submit" class="btn btn-info btn-elevate btn-pill btn-elevate-air btn-sm">
+									<i class="la la-upload"></i>Import Berkas
+								</button>
+							</div>
 						</div>
 					</div>
-			
 				</form>
 
 				<!--end::Form-->
@@ -73,7 +113,7 @@
 					searchDelay: 500,
 					processing: true,
 					serverSide: true,
-					scrollY: '40vh',
+					scrollY: '56vh',
 					scrollX: true,
 					scrollCollapse: true,
 
@@ -92,6 +132,7 @@
 			            { "data": "NIPD" },
 			            { "data": "jenis_kelamin" },
 			            { "data": "tahun_ajaran.nama" },
+			            { "data": "status_pesdik.nama" },
 			            { "data": "created_at" },
 			        ]
 		        })

@@ -38,6 +38,8 @@ Route::group([
         Route::get('import','PesertaDidik\PesertaDidikController@import')->name('pesdik.import');
         Route::get('list_pesdik/import', 'PesertaDidik\PesertaDidikController@get_data_pesdik_import')
                 ->name('pesdik.data_pesdik_import');
+        Route::post('proses_import', 'PesertaDidik\PesertaDidikController@proses_import')
+            ->name('pesdik.proses_import');
     });
     /*END::PESERTA DIDIK*/
     /*STAR::TENAGA PENDDIDIK*/

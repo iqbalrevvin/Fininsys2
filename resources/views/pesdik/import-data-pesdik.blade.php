@@ -6,7 +6,7 @@
 			</span>
 			<span class=" kt-font-warning">
 				Data Seluruh Peserta Didik<br>
-				<small class="kt-font-dark">Seluruh Peserta Didik Yang Pernah Di Input</small>
+				<small class="kt-font-dark">Seluruh Peserta Didik Berdasarkan Input Terbaru</small>
 			</span>
 		</div>
 		<div class="kt-portlet__head-toolbar">
@@ -27,6 +27,7 @@
                     <th>NIPD</th>
                     <th>Jenis Kelamin</th>
                     <th>Angkatan</th>
+                    <th>Status</th>
                     <th>Tanggal input</th>
                 </tr>
             </thead>

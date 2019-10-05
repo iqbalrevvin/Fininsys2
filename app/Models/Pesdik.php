@@ -7,6 +7,7 @@ use App\Models\Prakerin\Penempatan;
 class Pesdik extends Model
 {
     protected $table = 'pesdik';
+    protected $guarded = ['id'];
     /**
      * [Relasi Peserta Didik Dimiliki Program Studi]
      */

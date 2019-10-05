@@ -53,6 +53,7 @@ return array(
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Imports\\PesdikImport' => $baseDir . '/app/Imports/PesdikImport.php',
     'App\\Models\\Kelas' => $baseDir . '/app/Models/Kelas.php',
     'App\\Models\\Pesdik' => $baseDir . '/app/Models/Pesdik.php',
     'App\\Models\\Prakerin\\BidangUsaha' => $baseDir . '/app/Models/Prakerin/BidangUsaha.php',
