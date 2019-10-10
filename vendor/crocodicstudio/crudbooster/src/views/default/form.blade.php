@@ -28,10 +28,16 @@
                     </span>
                 </a>
                 @else
-                    <a href="{{CRUDBooster::mainpath()}}" title="Kembali" class="btn btn-clean kt-margin-r-10 nav_block">
+                    {{-- <a href="{{CRUDBooster::mainpath()}}" title="Kembali" class="btn btn-clean kt-margin-r-10 nav_block">
                         <i class="la la-arrow-left"></i>
                         <span class="kt-hidden-mobile">
                             {{trans("crudbooster.form_back_to_list",['module'=>CRUDBooster::getCurrentModule()->name])}}
+                        </span>
+                    </a> --}}
+                    <a href="{{ url()->previous() }}" title="Kembali" class="btn btn-clean kt-margin-r-10 nav_block">
+                        <i class="la la-arrow-left"></i>
+                        <span class="kt-hidden-mobile">
+                            Kembali
                         </span>
                     </a>
                 @endif

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Models\Pesdik;
+use App\Models\Prodi;
 use Session;
 use Yajra\DataTables\DataTables;
 use Excel;
@@ -43,7 +44,8 @@ class PesertaDidikController extends Controller
     public function import()
     {
         $page_title = 'Import Data Peserta Didik';
-        return view('pesdik.import', compact('page_title'));
+        $prodi      = Prodi::All();
+        return view('pesdik.import', compact('page_title', 'prodi'));
     }
 
     public function get_data_pesdik_import(DataTables $datatables)
@@ -56,36 +58,38 @@ class PesertaDidikController extends Controller
     public function proses_import(Request $request)
     {
         $this->validate($request, [
-          'file_import'  => 'required|mimes:xls,xlsx'
+          'file_import'     => 'required|mimes:xls,xlsx',
+          'prodi'           => 'required'
         ]);
 
-         $path = $request->file('file_import')->getRealPath();
-         $data = Excel::load($path)->get();
-
-         if($data->count() > 0){
+        $path   = $request->file('file_import')->getRealPath();
+        $data   = Excel::load($path)->get();
+        $prodi  = $request->prodi;
+        if($data->count() > 0){
             foreach($data as $key => $value){
                 $cek_nik = Pesdik::where('NIK', $value->nik)->exists();
                 $cek_nisn = Pesdik::where('NISN', $value->nisn)->exists();
                 $cek_nipd = Pesdik::where('NIPD', $value->nipd)->exists();
                 if(!$cek_nik && !$cek_nisn && !$cek_nipd){
                     $insert_data = [
-                        'nama_lengkap'  => $value->nama_lengkap,
-                        'NIK' => $value->nik,
-                        'NISN' => $value->nisn,
-                        'NIPD' => $value->nipd,
-                        'jenis_kelamin' => $value->jenis_kelamin,
-                        'NPSN_sekolah_asal' => $value->NPSN_sekolah_asal, 
-                        'nama_sekolah_asal' => $value->nama_sekolah_asal,
-                        'tempat_lahir' => $value->tempat_lahir,
-                        'tanggal_lahir' => $value->tanggal_lahir,
-                        'nama_ayah' => $value->nama_ayah,
-                        'NIK_ayah' => $value->nik_ayah,
-                        'tahun_lahir_ayah' => $value->thn_lahir_ayah,
-                        'nama_ibu' => $value->nama_ibu,
-                        'NIK_ibu' => $value->nik_ibu,
-                        'tahun_lahir_ibu' => $value->tahun_lahir_ibu,
-                        'tahun_ajaran_id' => tapel_aktif()->id,
-                        'status_pesdik_id' => 1
+                        'prodi_id'                 => $prodi,
+                        'nama_lengkap'          => $value->nama_lengkap,
+                        'NIK'                   => $value->nik,
+                        'NISN'                  => $value->nisn,
+                        'NIPD'                  => $value->nipd,
+                        'jenis_kelamin'         => $value->jenis_kelamin,
+                        'NPSN_sekolah_asal'     => $value->NPSN_sekolah_asal, 
+                        'nama_sekolah_asal'     => $value->nama_sekolah_asal,
+                        'tempat_lahir'          => $value->tempat_lahir,
+                        'tanggal_lahir'         => $value->tanggal_lahir,
+                        'nama_ayah'             => $value->nama_ayah,
+                        'NIK_ayah'              => $value->nik_ayah,
+                        'tahun_lahir_ayah'      => $value->thn_lahir_ayah,
+                        'nama_ibu'              => $value->nama_ibu,
+                        'NIK_ibu'               => $value->nik_ibu,
+                        'tahun_lahir_ibu'       => $value->tahun_lahir_ibu,
+                        'tahun_ajaran_id'       => tapel_aktif()->id,
+                        'status_pesdik_id'      => 1
                     ];
                     Pesdik::create($insert_data);
                     $count = 0;

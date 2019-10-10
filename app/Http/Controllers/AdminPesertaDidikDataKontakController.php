@@ -42,9 +42,9 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'No Telp','name'=>'no_telp','type'=>'number','validation'=>'required|numeric','width'=>'col-sm-3','help'=>'Contoh : 081223142314'];
-			$this->form[] = ['label'=>'Facebook','name'=>'facebook','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','help'=>'Hanya Username, Contoh : iqbal.revvin','placeholder'=>'@username'];
-			$this->form[] = ['label'=>'Instagram','name'=>'instagram','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','help'=>'Hanya Username, Contoh : iqbal.revvin','placeholder'=>'@username'];
-			$this->form[] = ['label'=>'Twitter','name'=>'twitter','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','help'=>'Hanya Username, Contoh : iqbal.revvin','placeholder'=>'@username'];
+			$this->form[] = ['label'=>'Facebook','name'=>'facebook','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10','help'=>'Hanya Username, Contoh : iqbal.revvin','placeholder'=>'@username'];
+			$this->form[] = ['label'=>'Instagram','name'=>'instagram','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10','help'=>'Hanya Username, Contoh : iqbal.revvin','placeholder'=>'@username'];
+			$this->form[] = ['label'=>'Twitter','name'=>'twitter','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10','help'=>'Hanya Username, Contoh : iqbal.revvin','placeholder'=>'@username'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM

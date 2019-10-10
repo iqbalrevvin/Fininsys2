@@ -34,7 +34,7 @@
         <script>
             WebFont.load({
                 google: {
-                    "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
+                    "families": ["Poppins:300,400,500,600,800", "Roboto:300,400,500,600,800"]
                 },
                 active: function() {
                     sessionStorage.fonts = true;

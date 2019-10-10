@@ -22,7 +22,7 @@
 	</div>
 	<div class="kt-portlet__body data_peserta">
 		<div class="kt-portlet__content">
-			<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="false" >
+			<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="false" style="height: 560px;">
 				@forelse($list_peserta as $peserta)
 					<div data-id="{{ $peserta->id }}" id="peserta{{ $peserta->id }}" class="kt-notes__items">
 						<div class="kt-notes__item" style="padding: 0 0 20px 45px;">
@@ -65,11 +65,13 @@
 									</div>
 								</div>
 								<span class="kt-notes__body">
-									<a href="#" class="kt-font-success">Lihat Profil</a> | <a href="#" class="kt-font-success">Detail</a>
+									<a href="#" class="kt-font-success">Lihat Profil</a> | 
+									<a href="javascript:;" data-toggle="modal" data-target="#detail_peserta{{$peserta->id}}" class="kt-font-success">Detail</a>
 								</span>
 							</div>
 						</div>
 					</div>
+					@include('prakerin.modal_detail_peserta')
 				@empty
 					<b class="text-danger">Belum ada peserta</b>
 				@endforelse

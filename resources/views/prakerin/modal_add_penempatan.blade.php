@@ -18,6 +18,9 @@
 									<option value="">Pilih Instansi</option>
 									@forelse($instansi as $list)
 										<optgroup label="{{ kabupaten($list->kabupaten_id) }}">
+											@php
+												$nama_instansi = App\Models\Prakerin\Instansi::where('kabupaten_id', $list->kabupaten_id)->get();
+											@endphp
 											@foreach($nama_instansi as $ins)
 												<option value="{{ $ins->id }}">{{ $ins->nama }}</option>
 											@endforeach

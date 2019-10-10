@@ -32,7 +32,7 @@
 			$this->col = [];
 			$this->col[] = ["label"=>"Nama Lengkap","name"=>"nama_lengkap"];
 			$this->col[] = ["label"=>"Jenis Kelamin","name"=>"jenis_kelamin"];
-			$this->col[] = ["label"=>"Program Studi","name"=>"prodi_id","join"=>"prodi,nama"];
+			$this->col[] = ["label"=>"Program Studi","name"=>"prodi_id","join"=>"prodi,singkatan"];
 			$this->col[] = ["label"=>"nipd","name"=>"NIPD"];
 			$this->col[] = ["label"=>"Nama Ayah","name"=>"nama_ayah"];
 			$this->col[] = ["label"=>"Tahun Lahir Ayah","name"=>"tahun_lahir_ayah"];
@@ -271,7 +271,9 @@
 	    |
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
-	    	//Your code here
+	    	if($column_index == 0) { 
+	    		$column_value = "<div style='text-align:left'><b>$column_value</b></div>"; 
+	    	}
 	    }
 
 	    /*

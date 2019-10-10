@@ -79,6 +79,23 @@
 							@endif
 						</div>
 						<div class="form-group">
+							<label>Program Studi Tujuan</label>
+							<div></div>
+							<div class="custom-file">
+								<select style='width:100%' class="form-control kt-select2" name="prodi" id="prodi">
+									<option value="">Pilih Program Studi</option>
+									@forelse($prodi as $prodi)
+										<option value="{{ $prodi->id }}">{{ $prodi->nama }}</option>
+									@empty
+										<option value="">Belum Ada Program Studi Tersediak</option>
+									@endforelse
+								</select>
+							</div>
+							@if($errors->first('prodi'))
+								<b class="text-danger">{{ $errors->first('prodi') }}</b>
+							@endif
+						</div>
+						<div class="form-group">
 							<div class="custom-file">
 								<button type="submit" class="btn btn-info btn-elevate btn-pill btn-elevate-air btn-sm">
 									<i class="la la-upload"></i>Import Berkas
@@ -105,6 +122,10 @@
 			$(document).on('click', '#reloadTabelListPesdik', function(e) {
         	 	tabel.ajax.reload(null,false); //reload datatable ajax 
     		});
+    		$('#prodi').select2({
+	            placeholder: "Pilih Program Studi Tujuan",
+	            allowClear: true
+	        });
 		});
 		var DatatablesBasicPaginations = {
 		    init: function() {
@@ -113,7 +134,7 @@
 					searchDelay: 500,
 					processing: true,
 					serverSide: true,
-					scrollY: '56vh',
+					scrollY: '43vh',
 					scrollX: true,
 					scrollCollapse: true,
 

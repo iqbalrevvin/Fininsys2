@@ -34,6 +34,7 @@
 			$this->col[] = ["label"=>"Npsn","name"=>"npsn"];
 			$this->col[] = ["label"=>"Nama Sekolah","name"=>"nama_sekolah"];
 			$this->col[] = ["label"=>"Logo","name"=>"logo","image"=>true];
+			$this->col[] = ["label"=>"Dinas","name"=>"logo_dinas","image"=>true];
 			$this->col[] = ["label"=>"Rt","name"=>"rt"];
 			$this->col[] = ["label"=>"Rw","name"=>"rw"];
 			$this->col[] = ["label"=>"Alamat","name"=>"alamat"];
@@ -45,6 +46,7 @@
 			$this->form[] = ['label'=>'Npsn','name'=>'npsn','type'=>'number','validation'=>'required','width'=>'col-sm-3'];
 			$this->form[] = ['label'=>'Nama Sekolah','name'=>'nama_sekolah','type'=>'text','validation'=>'required','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'Logo','name'=>'logo','type'=>'upload','validation'=>'required','width'=>'col-sm-4'];
+			$this->form[] = ['label'=>'Logo Dinas','name'=>'logo_dinas','type'=>'upload','width'=>'col-sm-4'];
 			$this->form[] = ['label'=>'Provinsi','name'=>'provinsi','type'=>'text','validation'=>'required','width'=>'col-sm-4'];
 			$this->form[] = ['label'=>'Kabupaten/Kota','name'=>'kota','type'=>'text','validation'=>'required','width'=>'col-sm-4'];
 			$this->form[] = ['label'=>'Kecamatan','name'=>'kecamatan','type'=>'text','validation'=>'required','width'=>'col-sm-4'];
@@ -54,12 +56,15 @@
 			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Kode Pos','name'=>'kode_pos','type'=>'number','validation'=>'required','width'=>'col-sm-2'];
 			$this->form[] = ['label'=>'Yayasan','name'=>'yayasan','type'=>'text','width'=>'col-sm-4'];
+			$this->form[] = ['label'=>'Status Akreditasi','name'=>'status_akreditasi','type'=>'select','validation'=>'required','width'=>'col-sm-4','dataenum'=>'A;B;C;D;Belum Terakreditasi'];
+			$this->form[] = ['label'=>'No. SK Akreditasi','name'=>'sk_akreditasi','type'=>'text','width'=>'col-sm-9'];
 			$this->form[] = ['label'=>'Sk Pendirian Sekolah','name'=>'sk_pendirian_sekolah','type'=>'text','width'=>'col-sm-4'];
-			$this->form[] = ['label'=>'Tanggal Sk Pendirian','name'=>'tanggal_sk_pendirian','type'=>'date','width'=>'col-sm-3'];
-			$this->form[] = ['label'=>'Sk Izin Operasional','name'=>'sk_izin_operasional','type'=>'text','width'=>'col-sm-4'];
+			$this->form[] = ['label'=>'Tanggal Sk Pendirian','name'=>'tanggal_sk_pendirian','type'=>'date','width'=>'col-sm-3','placeholder'=>'Mohon input alamat email dengan benar'];
+			$this->form[] = ['label'=>'Sk Izin Operasional','name'=>'sk_izin_operasional','type'=>'text','width'=>'col-sm-4','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
 			$this->form[] = ['label'=>'Tanggal Sk Izin Operasional','name'=>'tanggal_sk_izin_operasional','type'=>'date','validation'=>'required|date','width'=>'col-sm-3'];
-			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','width'=>'col-sm-10','placeholder'=>'Mohon input alamat email dengan benar'];
-			$this->form[] = ['label'=>'No Telp','name'=>'no_telp','type'=>'number','validation'=>'required','width'=>'col-sm-3','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
+			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','width'=>'col-sm-4'];
+			$this->form[] = ['label'=>'Situs Resmi','name'=>'website','type'=>'text','width'=>'col-sm-5'];
+			$this->form[] = ['label'=>'No Telp','name'=>'no_telp','type'=>'number','validation'=>'required','width'=>'col-sm-3'];
 			$this->form[] = ['label'=>'Facebook','name'=>'facebook','type'=>'text','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Instagram','name'=>'instagram','type'=>'text','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Twitter','name'=>'twitter','type'=>'text','width'=>'col-sm-10'];
@@ -74,21 +79,24 @@
 			//$this->form[] = ['label'=>'Npsn','name'=>'npsn','type'=>'number','validation'=>'required','width'=>'col-sm-3'];
 			//$this->form[] = ['label'=>'Nama Sekolah','name'=>'nama_sekolah','type'=>'text','validation'=>'required','width'=>'col-sm-5'];
 			//$this->form[] = ['label'=>'Logo','name'=>'logo','type'=>'upload','validation'=>'required','width'=>'col-sm-4'];
+			//$this->form[] = ['label'=>'Logo Dinas','name'=>'logo_dinas','type'=>'upload','width'=>'col-sm-4'];
 			//$this->form[] = ['label'=>'Provinsi','name'=>'provinsi','type'=>'text','validation'=>'required','width'=>'col-sm-4'];
 			//$this->form[] = ['label'=>'Kabupaten/Kota','name'=>'kota','type'=>'text','validation'=>'required','width'=>'col-sm-4'];
 			//$this->form[] = ['label'=>'Kecamatan','name'=>'kecamatan','type'=>'text','validation'=>'required','width'=>'col-sm-4'];
 			//$this->form[] = ['label'=>'Desa','name'=>'desa','type'=>'text','validation'=>'required','width'=>'col-sm-4'];
-			//$this->form[] = ['label'=>'Rw','name'=>'rw','type'=>'number','width'=>'col-sm-2'];
-			//$this->form[] = ['label'=>'Rt','name'=>'rt','type'=>'number','width'=>'col-sm-2'];
+			//$this->form[] = ['label'=>'Rw','name'=>'rw','type'=>'number','width'=>'col-sm-1'];
+			//$this->form[] = ['label'=>'Rt','name'=>'rt','type'=>'number','width'=>'col-sm-1'];
 			//$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Kode Pos','name'=>'kode_pos','type'=>'number','validation'=>'required','width'=>'col-sm-2'];
 			//$this->form[] = ['label'=>'Yayasan','name'=>'yayasan','type'=>'text','width'=>'col-sm-4'];
+			//$this->form[] = ['label'=>'Status Akreditasi','name'=>'status_akreditasi','type'=>'select','validation'=>'required','width'=>'col-sm-4','dataenum'=>'A;B;C;D;Belum Terakreditasi'];
+			//$this->form[] = ['label'=>'No. SK Akreditasi','name'=>'sk_akreditasi','type'=>'text','width'=>'col-sm-9'];
 			//$this->form[] = ['label'=>'Sk Pendirian Sekolah','name'=>'sk_pendirian_sekolah','type'=>'text','width'=>'col-sm-4'];
-			//$this->form[] = ['label'=>'Tanggal Sk Pendirian','name'=>'tanggal_sk_pendirian','type'=>'date','width'=>'col-sm-3'];
-			//$this->form[] = ['label'=>'Sk Izin Operasional','name'=>'sk_izin_operasional','type'=>'text','width'=>'col-sm-4'];
+			//$this->form[] = ['label'=>'Tanggal Sk Pendirian','name'=>'tanggal_sk_pendirian','type'=>'date','width'=>'col-sm-3','placeholder'=>'Mohon input alamat email dengan benar'];
+			//$this->form[] = ['label'=>'Sk Izin Operasional','name'=>'sk_izin_operasional','type'=>'text','width'=>'col-sm-4','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
 			//$this->form[] = ['label'=>'Tanggal Sk Izin Operasional','name'=>'tanggal_sk_izin_operasional','type'=>'date','validation'=>'required|date','width'=>'col-sm-3'];
-			//$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','width'=>'col-sm-10','placeholder'=>'Mohon input alamat email dengan benar'];
-			//$this->form[] = ['label'=>'No Telp','name'=>'no_telp','type'=>'number','validation'=>'required','width'=>'col-sm-3','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
+			//$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'No Telp','name'=>'no_telp','type'=>'number','validation'=>'required','width'=>'col-sm-3'];
 			//$this->form[] = ['label'=>'Facebook','name'=>'facebook','type'=>'text','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Instagram','name'=>'instagram','type'=>'text','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Twitter','name'=>'twitter','type'=>'text','width'=>'col-sm-10'];
@@ -291,8 +299,16 @@
 	    | ---------------------------------------------------------------------- 
 	    |
 	    */    
-	    public function hook_row_index($column_index,&$column_value) {	        
-	    	//Your code here
+	    public function hook_row_index($column_index,&$column_value) {	      
+	    	if($column_index == 2) { 
+	    		$column_value = "<div style='text-align:left'><b>$column_value</b></div>"; 
+	    	}  
+	    	if($column_index == 3) { 
+	    		$column_value = "<div style='text-align:center'><b>$column_value</b></div>"; 
+	    	}
+	    	if ($column_index == 4) {
+	    		$column_value = "<div style='text-align:center'>$column_value</div>"; 
+	    	}
 	    }
 
 	    /*

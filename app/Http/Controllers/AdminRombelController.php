@@ -36,7 +36,7 @@
 			$this->col[] = ["label"=>"Tahun Ajaran","name"=>"tahun_ajaran_id","join"=>"tahun_ajaran,nama"];
 			$this->col[] = ["label"=>"Jumlah Peserta","name"=>"(select count(pesdik_rombel.id) from pesdik_rombel where pesdik_rombel.rombel_id = rombel.id) as total_pesdik"];
 			$this->col[] = ["label"=>"Kelas","name"=>"kelas_id","join"=>"kelas,nama"];
-			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
+			// $this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
 			$this->col[] = ["label"=>"Dibuat Pada","name"=>"created_at"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 

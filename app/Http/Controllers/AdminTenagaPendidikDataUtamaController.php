@@ -57,6 +57,7 @@
 			$this->form[] = ['label'=>'Kabupaten/Kota','name'=>'kabupaten_id','type'=>'select','width'=>'col-sm-5','datatable'=>'kabupaten,name','parent_select'=>'provinsi_id'];
 			$this->form[] = ['label'=>'Kecamatan','name'=>'kecamatan_id','type'=>'select','width'=>'col-sm-5','datatable'=>'kecamatan,name','parent_select'=>'kabupaten_id'];
 			$this->form[] = ['label'=>'Kelurahan','name'=>'kelurahan_id','type'=>'select','width'=>'col-sm-5','datatable'=>'kelurahan,name','parent_select'=>'kecamatan_id'];
+			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','validation'=>'','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'Rt','name'=>'rt','type'=>'number','validation'=>'numeric','width'=>'col-sm-1'];
 			$this->form[] = ['label'=>'Rw','name'=>'rw','type'=>'number','validation'=>'numeric','width'=>'col-sm-1'];
 			$this->form[] = ['label'=>'No Telp','name'=>'no_telp','type'=>'number','validation'=>'numeric','width'=>'col-sm-3','placeholder'=>'Anda hanya dapat memasukkan angka saja'];

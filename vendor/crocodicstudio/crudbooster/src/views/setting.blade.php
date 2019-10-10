@@ -52,7 +52,7 @@
 
         </script>
     @endpush
-    <div class="kt-portlet" style="width:750px;margin:0 auto">
+    <div class="kt-portlet" style="width:1000px;margin:0 auto">
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <span class="kt-portlet__head-icon">

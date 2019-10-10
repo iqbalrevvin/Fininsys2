@@ -85,7 +85,7 @@
 									@endif						
 								</div>
 								<div class="kt-widget__info">
-									<a href="{{ url('admin/peserta-didik/profil/'.$list->id)}}" class="kt-widget__username">
+									<a href="{{ url('admin/peserta-didik/profil/'.$list->id)}}" class="kt-widget__username nav_block">
 										{{ cut_name($list->nama_lengkap) }}
 										{{-- {{ $list->nama_lengkap }} --}}
 									</a>

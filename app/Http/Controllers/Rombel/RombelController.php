@@ -24,7 +24,6 @@ class RombelController extends Controller
 		return view('rombel.kelola',[
             'page_title'        => $page_title,
             'page_notice'       => $page_notice,
-  
             'rombel'            => $rombel,
             'tenpen'            => $tenpen,
             'kelas'             => $kelas,
@@ -50,8 +49,32 @@ class RombelController extends Controller
 
     public function get_list_pesdik(DataTables $datatables, Request $request)
     {
-        $id         = $request->input('id');
-        $students   = Pesdik::with('tahun_ajaran')->select('pesdik.id', 'pesdik.nama_lengkap', 'pesdik.jenis_kelamin', 'pesdik.NIPD', 'pesdik.NISN', 'pesdik.tahun_ajaran_id')->where('status_pesdik_id', '1')->where('prodi_id', $id);
+        $tapel_id           = $request->input('tahun_ajaran_id');
+        $prodi_id           = $request->input('prodi_id');
+        $rombel_id          = $request->input('rombel_id');
+
+        $rombel_tapel       = Rombel::where('tahun_ajaran_id', $tapel_id)->get();
+        foreach ($rombel_tapel as $rombel) {
+            $list_rombel[] = $rombel->id; /*List Rombel Teridentifikasi di Tapel Terpilih*/
+        }
+
+        $cek_rombel         = DB::table('pesdik_rombel')->whereIn('rombel_id', $list_rombel)->exists();
+        if($cek_rombel){ /*Apabila rombel pada pesdik rombel tersedia*/
+            $pesdik = DB::table('pesdik_rombel')->whereIn('rombel_id', $list_rombel)->get();
+            foreach ($pesdik as $pesdik) {
+                $list_pesdik[] = $pesdik->pesdik_id; /*List Pesdik Yang Terdaftar Ke Rombel Di Tapel Terpilih*/
+            }
+            $students   = Pesdik::with('tahun_ajaran')->select('pesdik.id', 'pesdik.nama_lengkap', 'pesdik.jenis_kelamin', 'pesdik.NIPD', 'pesdik.NISN', 'pesdik.tahun_ajaran_id')
+                ->where('status_pesdik_id', '1')
+                ->where('prodi_id', $prodi_id)
+                ->whereNotIn('id', $list_pesdik);
+        }else{ /*Jika rombel terpilih tidak ada pada tabel pesdik_rombel*/
+            $students   = Pesdik::with('tahun_ajaran')->select('pesdik.id', 'pesdik.nama_lengkap', 'pesdik.jenis_kelamin', 'pesdik.NIPD', 'pesdik.NISN', 'pesdik.tahun_ajaran_id')
+                ->where('status_pesdik_id', '1')
+                ->where('prodi_id', $prodi_id);
+        }
+        
+
         return $datatables->eloquent($students)
                 ->addColumn('checkbox', '<label class="kt-checkbox kt-checkbox--success"><input type="checkbox" name="student_checkbox[]" class="student_checkbox data-check" value="{{$id}}" /> Pilih<span></span></label>')
                 //->addColumn('nama', return $tahun_ajaran->nama);

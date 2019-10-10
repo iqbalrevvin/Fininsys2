@@ -9,10 +9,12 @@ use App\Models\Prakerin\PrakerinMaster;
 use App\Models\Prakerin\Instansi;
 use App\Models\Prakerin\PembimbingLapangan;
 use App\Models\Prakerin\Penempatan;
+use App\Models\Sekolah;
 use App\Models\Tenpen;
 use App\Models\Pesdik;
 use App\Models\Rombel;
 use Yajra\DataTables\DataTables;
+use PDF;
 class PrakerinController extends Controller
 {
     public function index()
@@ -40,9 +42,9 @@ class PrakerinController extends Controller
     									->orderBy('prakerin_instansi.kabupaten_id')
     									->groupBy('prakerin_instansi.kabupaten_id')
     									->get();
-    	foreach($instansi as $list){
-    		$nama_instansi = Instansi::where('kabupaten_id', $list->kabupaten_id)->get();
-    	} 
+    	// foreach($instansi as $list){
+    	// 	$nama_instansi = Instansi::where('kabupaten_id', $list->kabupaten_id)->get();
+    	// } 
     	$pembimbing_lapangan = PembimbingLapangan::All();
     	$pembimbing_akademik = Tenpen::All();
     	$list_instansi 		 = Penempatan::where('prakerin_master_id', $id)->get();
@@ -254,5 +256,22 @@ class PrakerinController extends Controller
 
         // echo json_encode($callback);
         return $callback->toJson();
+    }
+
+    public function cetak_surat_pengantar(Request $request)
+    {   
+        $sekolah            = Sekolah::find(1);
+        $master_id          = $request->input('master_id');
+        $penempatan_id      = $request->input('penempatan_id');
+        $no_surat           = $request->input('nomor_surat');
+        $tgl_surat          = $request->input('tanggal_surat');
+        $lampiran_surat     = $request->input('lampiran_surat');
+        $penempatan         = Penempatan::find($penempatan_id);
+        $list_peserta       = Penempatan::find($penempatan_id)->pesdik()->orderBy('nama_lengkap')->get();
+        $page_title         = 'Cetak Surat Pengantar';
+        $customPaper        = array(0,0,600,1000);
+        PDF::setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadview('prakerin.cetak.surat_pengantar',compact('sekolah','master_id', 'list_peserta', 'no_surat', 'tgl_surat','lampiran_surat', 'penempatan'))->setPaper($customPaper, 'potrait');
+        return $pdf->stream('test.pdf');
     }
 }

@@ -32,23 +32,25 @@
 			$this->col = [];
 			$this->col[] = ["label"=>"NIK","name"=>"NIK"];
 			$this->col[] = ["label"=>"Nama","name"=>"nama"];
+			$this->col[] = ["label"=>"Jenis Kelamin","name"=>"jenis_kelamin"];
 			$this->col[] = ["label"=>"No Hp","name"=>"no_hp"];
 			$this->col[] = ["label"=>"Alamat","name"=>"alamat"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'NIK','name'=>'NIK','type'=>'text','validation'=>'min:1|max:16','width'=>'col-sm-7'];
-			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-7','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
-			$this->form[] = ['label'=>'No Hp','name'=>'no_hp','type'=>'text','validation'=>'required|numeric','width'=>'col-sm-5','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
-			$this->form[] = ['label'=>'Alamat Lengkap','name'=>'alamat','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-7'];
+			$this->form[] = ['label'=>'NIK','name'=>'NIK','type'=>'text','validation'=>'min:1|max:16','width'=>'col-sm-5'];
+			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-5','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
+			$this->form[] = ['label'=>'Jenis Kelamin','name'=>'jenis_kelamin','type'=>'select','validation'=>'required','width'=>'col-sm-5','dataenum'=>'Laki-laki;Perempuan','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
+			$this->form[] = ['label'=>'No Hp','name'=>'no_hp','type'=>'text','validation'=>'required|numeric','width'=>'col-sm-5'];
+			$this->form[] = ['label'=>'Alamat Lengkap','name'=>'alamat','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-5'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
 			//$this->form[] = ['label'=>'NIK','name'=>'NIK','type'=>'text','validation'=>'min:1|max:16','width'=>'col-sm-7'];
 			//$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-7','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
-			//$this->form[] = ['label'=>'No Hp','name'=>'no_hp','type'=>'number','validation'=>'required|numeric','width'=>'col-sm-5','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
+			//$this->form[] = ['label'=>'No Hp','name'=>'no_hp','type'=>'text','validation'=>'required|numeric','width'=>'col-sm-5','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
 			//$this->form[] = ['label'=>'Alamat Lengkap','name'=>'alamat','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-7'];
 			# OLD END FORM
 

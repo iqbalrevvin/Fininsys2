@@ -110,6 +110,17 @@
         return $sekolah;
     }
 
+    /*START:: FUNGSI UNTUK NOMOR HP*/
+    function telp($telp){
+      $telp = $telp;
+      $noHP1 = substr($telp,0,4);
+      $noHP2 = substr($telp,4,4);
+      $noHP3 = substr($telp,8,5);
+      $handphone = $noHP1."-".$noHP2."-".$noHP3;
+      return "$handphone";
+    }
+    
+
     /**
      * START :: FUNCTION TANGGAL INDONESIA
      */
@@ -402,5 +413,16 @@
             return $instansi->nama;
         }
     /*END::INSTANSI*/
+
+    /*START::PEMBIMBING LAPANGAN*/
+        function gender_pembimbing($jk){
+            if ($jk == 'Laki-laki') {
+                $val = 'Bpk.';
+            }else{
+                $val = 'Ibu';
+            }
+            return $val;
+        }
+    /*END::PEMBIMBING LAPANGAN*/
 
  ?>

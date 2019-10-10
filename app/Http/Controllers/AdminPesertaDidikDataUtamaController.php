@@ -12,7 +12,7 @@
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "nama_lengkap";
 			$this->limit = "20";
-			$this->orderby = "id,asc";
+			$this->orderby = "tahun_ajaran_id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -38,7 +38,7 @@
 			$this->col[] = ["label"=>"NISN","name"=>"NISN"];
 			$this->col[] = ["label"=>"NIK","name"=>"NIK"];
 			$this->col[] = ["label"=>"PIP","name"=>"penerima_kip"];
-			$this->col[] = ["label"=>"Tgl Lahir","name"=>"tanggal_lahir"];
+			// $this->col[] = ["label"=>"Tgl Lahir","name"=>"tanggal_lahir"];
 			$this->col[] = ["label"=>"Status","name"=>"status_pesdik_id","join"=>"status_pesdik,nama"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -57,7 +57,7 @@
 			$this->form[] = ['label'=>'Nama Sekolah Asal','name'=>'nama_sekolah_asal','type'=>'text','validation'=>'','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'Tempat Lahir','name'=>'tempat_lahir','type'=>'text','validation'=>'required','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'Tanggal Lahir','name'=>'tanggal_lahir','type'=>'date','validation'=>'required|date','width'=>'col-sm-3'];
-			$this->form[] = ['label'=>'Registrasi Akta Lahir','name'=>'registrasi_akta_lahir','type'=>'text','validation'=>'required','width'=>'col-sm-5'];
+			$this->form[] = ['label'=>'Registrasi Akta Lahir','name'=>'registrasi_akta_lahir','type'=>'text','validation'=>'','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'Agama','name'=>'agama','type'=>'select','validation'=>'required','width'=>'col-sm-4','datatable'=>'agama,nama'];
 			$this->form[] = ['label'=>'Kewarganegaraan','name'=>'kewarganegaraan','type'=>'select','validation'=>'required','width'=>'col-sm-4','dataenum'=>'WNI;WNA'];
 			$this->form[] = ['label'=>'Kebutuhan Khusus','name'=>'kebutuhan_khusus','type'=>'select2','width'=>'col-sm-3','datatable'=>'kebutuhan_khusus,nama'];
@@ -68,15 +68,15 @@
 			$this->form[] = ['label'=>'Rt','name'=>'rt','type'=>'text','validation'=>'max:3','width'=>'col-sm-1'];
 			$this->form[] = ['label'=>'Rw','name'=>'rw','type'=>'text','validation'=>'max:3','width'=>'col-sm-1'];
 			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Kode Pos','name'=>'kode_pos','type'=>'text','validation'=>'required|max:5','width'=>'col-sm-2'];
+			$this->form[] = ['label'=>'Kode Pos','name'=>'kode_pos','type'=>'text','validation'=>'max:5','width'=>'col-sm-2'];
 			$this->form[] = ['label'=>'Tempat Tinggal','name'=>'tempat_tinggal','type'=>'select2','width'=>'col-sm-3','datatable'=>'tempat_tinggal,nama'];
-			$this->form[] = ['label'=>'Moda Transportasi','name'=>'moda_transportasi','type'=>'select2','width'=>'col-sm-3','datatable'=>'moda_transportasi,nama','help'=>'Kosongkan Jika Bukan Penerima'];
-			$this->form[] = ['label'=>'No Kks','name'=>'no_kks','type'=>'text','validation'=>'max:10','width'=>'col-sm-3'];
-			$this->form[] = ['label'=>'Anak Ke','name'=>'anak_ke','type'=>'text','validation'=>'max:2','width'=>'col-sm-1','help'=>'Kosongkan Jika Bukan Penerima'];
-			$this->form[] = ['label'=>'Penerima Kps','name'=>'penerima_kps','type'=>'select','validation'=>'required','width'=>'col-sm-2','dataenum'=>'Ya;Tidak','help'=>'Kosonkan Jika Bukan Penerima'];
-			$this->form[] = ['label'=>'No Kps','name'=>'no_kps','type'=>'text','validation'=>'max:10','width'=>'col-sm-3'];
-			$this->form[] = ['label'=>'Penerima Kip','name'=>'penerima_kip','type'=>'select','validation'=>'required','width'=>'col-sm-2','dataenum'=>'Ya;Tidak','help'=>'Kosongkan Bukan Penerima'];
-			$this->form[] = ['label'=>'No Kip','name'=>'no_kip','type'=>'text','validation'=>'max:10','width'=>'col-sm-3','help'=>'Kosonkan Jika Bukan Penerima'];
+			$this->form[] = ['label'=>'Moda Transportasi','name'=>'moda_transportasi','type'=>'select2','width'=>'col-sm-3','datatable'=>'moda_transportasi,nama'];
+			$this->form[] = ['label'=>'No Kks','name'=>'no_kks','type'=>'text','validation'=>'max:10','width'=>'col-sm-3','help'=>'Kosongkan Jika Bukan Penerima'];
+			$this->form[] = ['label'=>'Anak Ke','name'=>'anak_ke','type'=>'text','validation'=>'max:2','width'=>'col-sm-1'];
+			$this->form[] = ['label'=>'Penerima Kps','name'=>'penerima_kps','type'=>'select','validation'=>'required','width'=>'col-sm-2','dataenum'=>'Ya;Tidak'];
+			$this->form[] = ['label'=>'No Kps','name'=>'no_kps','type'=>'text','validation'=>'max:10','width'=>'col-sm-3','help'=>'Kosongkan Jika Bukan Penerima'];
+			$this->form[] = ['label'=>'Penerima Kip','name'=>'penerima_kip','type'=>'select','validation'=>'required','width'=>'col-sm-2','dataenum'=>'Ya;Tidak'];
+			$this->form[] = ['label'=>'No. Kip/No. Rekening','name'=>'no_kip','type'=>'text','validation'=>'max:10','width'=>'col-sm-3','help'=>'Kosonkan Jika Bukan Penerima'];
 			$this->form[] = ['label'=>'Nama Di Kip','name'=>'nama_kip','type'=>'text','width'=>'col-sm-4','help'=>'Alasan Jika Siswa Layak PIP'];
 			$this->form[] = ['label'=>'Alasan Layak Pip','name'=>'alasan_layak_pip','type'=>'text','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
@@ -322,7 +322,12 @@
 	    |
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
-	    	//Your code here
+	    	if($column_index == 1) { 
+	    		$column_value = "<div style='text-align:left'><b>$column_value</b></div>"; 
+	    	}
+	    	if($column_index == 9) { 
+	    		$column_value = "<div style='text-align:left'><b>$column_value</b></div>"; 
+	    	}
 	    }
 
 	    /*

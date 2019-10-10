@@ -269,7 +269,9 @@
 	    |
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
-	    	//Your code here
+	    	if($column_index == 1) { 
+	    		$column_value = "<div style='text-align:left'><b>$column_value</b></div>"; 
+	    	}
 	    }
 
 	    /*

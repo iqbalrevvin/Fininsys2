@@ -445,7 +445,9 @@
 		 */
 		var DatatablesBasicPaginations = {
 		    init: function() {
-		    	var idProdi 	= $('#prodiID').val();
+		    	var idProdi 		= $('#prodiID').val();
+		    	var tapel_id 		= $('#tahunAjaranID').val();
+		    	var rombel_id 		= $('#idRombel').val();
 		        tabel = $("#tbl_pilih_peserta_rombel").DataTable({
 		            responsive: true,
 					searchDelay: 500,
@@ -456,7 +458,9 @@
 						url: '{{ route('rombel.get_list_pesdik') }}',
 						method: 'GET',
 						data: {
-							id:idProdi,
+							prodi_id		: idProdi,
+							tahun_ajaran_id : tapel_id,
+							rombel_id 		: rombel_id
 						},
 					},
 

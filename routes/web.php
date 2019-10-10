@@ -59,6 +59,9 @@ Route::group([
         Route::get('get-list-pilih-peserta', 'Prakerin\PrakerinController@get_list_pilih_peserta')->name('prakerin.get_list_pilih_peserta');
         Route::get('insert-peserta', 'Prakerin\PrakerinController@insert_peserta')->name('prakerin.insert_peserta');
         Route::get('delete-peserta', 'Prakerin\PrakerinController@delete_peserta')->name('prakerin.delete_peserta');
+
+        Route::get('cetak/surat-pengantar', 'Prakerin\PrakerinController@cetak_surat_pengantar')
+                ->name('prakerin.cetak_surat_pengantar');
     });
     /*END::PRAKERIN*/
 

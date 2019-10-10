@@ -45,6 +45,11 @@
 				</div>
 				<div class="kt-portlet__body">
 					<div class="kt-portlet__content">
+						<div class="form-group row">
+							<div class="col-lg-12 col-md-12 col-sm-12 float-right">
+								<input type='text' title="Cari Instansi" class='form-control notfocus' id="cari_instansi" placeholder="Pencarian" />
+							</div>
+						</div>
 						<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="true" style="height: 500px;">
 							<div id="show_instansi">
 				                <div class="kt-blockui text-justify">
@@ -88,6 +93,7 @@
 		@include('prakerin.modal_add_peserta')	
 	{{-- END::DATA PILIH PESERTA PRAKERIN --}}
 
+	
 @endsection
 
 @push('bottom')
