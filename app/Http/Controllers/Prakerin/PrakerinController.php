@@ -276,6 +276,15 @@ class PrakerinController extends Controller
         $customPaper        = array(0,0,600,1000);
         PDF::setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
         $pdf = PDF::loadview('prakerin.cetak.surat_pengantar',compact('sekolah','master_id', 'list_peserta', 'no_surat', 'tgl_surat','lampiran_surat', 'penempatan'))->setPaper($customPaper, 'potrait');
-        return $pdf->stream('test.pdf');
+        return $pdf->stream('Surat Pengantar | '.$penempatan->instansi->nama.'.pdf');
+    }
+    public function CetakDaftarInstansi(Request $request)
+    {
+        $prakerin_master    = $request->input('prakerin_master');
+        $prakerin           = PrakerinMaster::find($prakerin_master);
+        $page_title = 'Daftar instansi';
+        PDF::setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadview('prakerin.cetak.daftar_instansi',compact('page_title', 'prakerin'))->setPaper($customPaper, 'landscape');
+        return $pdf->stream('Daftar Instansi.pdf'); 
     }
 }

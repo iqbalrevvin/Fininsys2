@@ -67,7 +67,7 @@
 			$this->form[] = ['label'=>'Kelurahan','name'=>'kelurahan_id','type'=>'select','width'=>'col-sm-5','datatable'=>'kelurahan,name','parent_select'=>'kecamatan_id'];
 			$this->form[] = ['label'=>'Rt','name'=>'rt','type'=>'text','validation'=>'max:3','width'=>'col-sm-1'];
 			$this->form[] = ['label'=>'Rw','name'=>'rw','type'=>'text','validation'=>'max:3','width'=>'col-sm-1'];
-			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'Kode Pos','name'=>'kode_pos','type'=>'text','validation'=>'max:5','width'=>'col-sm-2'];
 			$this->form[] = ['label'=>'Tempat Tinggal','name'=>'tempat_tinggal','type'=>'select2','width'=>'col-sm-3','datatable'=>'tempat_tinggal,nama'];
 			$this->form[] = ['label'=>'Moda Transportasi','name'=>'moda_transportasi','type'=>'select2','width'=>'col-sm-3','datatable'=>'moda_transportasi,nama'];

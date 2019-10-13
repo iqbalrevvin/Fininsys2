@@ -35,16 +35,16 @@
 							title="Tambahkan Instansi" data-toggle="modal" data-target="#add_tempat" data-backdrop="static">
 							<img src="{{ asset('metronic/media/icons/svg/Code/plus.svg') }}"/>
 						</button>
+						<a href="{{ route('prakerin.cetak_daftar_instansi') }}?prakerin_master={{ $master_prakerin->id }}" target="_blank" 
+							class="btn btn-outline-warning btn-elevate btn-pill btn-elevate-air btn-circle btn-icon btn-sm"
+							title="Cetak Data Penempatan">
+							<img src="{{ asset('metronic/media/icons/svg/Devices/Printer.svg') }}"/>
+						</a>
 						<button type="button" 
 							class="btn btn-outline-info btn-elevate btn-pill btn-elevate-air btn-circle btn-icon btn-sm"
 							data-toggle="modal" data-target="#informasi_penempatan" title="Informasi Penempatan">
 							<img src="{{ asset('metronic/media/icons/svg/Code/Info-circle.svg') }}"/>
 						</button>
-						<a href="#" 
-							class="btn btn-outline-warning btn-elevate btn-pill btn-elevate-air btn-circle btn-icon btn-sm"
-							title="Cetak Data Penempatan">
-							<img src="{{ asset('metronic/media/icons/svg/Devices/Printer.svg') }}"/>
-						</a>
 						</div>
 					</div>
 				</div>

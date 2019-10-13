@@ -36,14 +36,15 @@ Route::group([
         Route::get('list', 'PesertaDidikController@index')->name('pesdik.list');
         Route::get('profil/{pesdik}','PesertaDidikController@profil');
         Route::get('import','PesertaDidikController@import')->name('pesdik.import');
-        Route::get('list_pesdik/import', 'PesertaDidikController@get_data_pesdik_import')
-                ->name('pesdik.data_pesdik_import');
-        Route::post('proses_import', 'PesertaDidikController@proses_import')
-            ->name('pesdik.proses_import');
+        Route::get('list_pesdik/import', 'PesertaDidikController@get_data_pesdik_import')->name('pesdik.data_pesdik_import');
+        Route::post('proses_import', 'PesertaDidikController@proses_import')->name('pesdik.proses_import');
     });
     /*END::PESERTA DIDIK*/
     /*STAR::TENAGA PENDDIDIK*/
-        Route::get('admin/tenaga-pendidik/jabatan', 'TenagaPendidik\TenagaPendidikController@jabatan')->name('tenpen.jabatan');
+    Route::group(['prefix' => 'admin/tenaga-pendidik', 'namespace' => 'TenagaPendidik'], function () {
+        Route::get('jabatan', 'TenagaPendidikController@jabatan')->name('tenpen.jabatan');
+    });
+    
     /*END::TENAGA PENDDIDIK*/
     /*STAR::PRAKERIN*/
     Route::group(['prefix' => 'admin/prakerin', 'namespace' => 'Prakerin'], function () {
@@ -60,7 +61,9 @@ Route::group([
         Route::get('insert-peserta', 'PrakerinController@insert_peserta')->name('prakerin.insert_peserta');
         Route::get('delete-peserta', 'PrakerinController@delete_peserta')->name('prakerin.delete_peserta');
         Route::get('cetak/surat-pengantar', 'PrakerinController@cetak_surat_pengantar')
-                ->name('prakerin.cetak_surat_pengantar');
+            ->name('prakerin.cetak_surat_pengantar');
+        Route::get('cetak/daftar-instansi', 'PrakerinController@CetakDaftarInstansi')
+            ->name('prakerin.cetak_daftar_instansi');
     });
     /*END::PRAKERIN*/
 

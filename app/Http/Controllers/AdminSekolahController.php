@@ -45,6 +45,7 @@
 			$this->form[] = ['label'=>'Jenjang','name'=>'jenjang','type'=>'select','validation'=>'required','width'=>'col-sm-2','dataenum'=>'SD;SMP;SMA;SMK'];
 			$this->form[] = ['label'=>'Npsn','name'=>'npsn','type'=>'number','validation'=>'required','width'=>'col-sm-3'];
 			$this->form[] = ['label'=>'Nama Sekolah','name'=>'nama_sekolah','type'=>'text','validation'=>'required','width'=>'col-sm-5'];
+			$this->form[] = ['label'=>'Kepala Sekolah','name'=>'tenpen_id','type'=>'select2','validation'=>'required','width'=>'col-sm-4','datatable'=>'tenpen,nama_lengkap', 'help' => 'Pastikan Sudah Menambahkan Tenaga Pendidik'];
 			$this->form[] = ['label'=>'Logo','name'=>'logo','type'=>'upload','validation'=>'required','width'=>'col-sm-4'];
 			$this->form[] = ['label'=>'Logo Dinas','name'=>'logo_dinas','type'=>'upload','width'=>'col-sm-4'];
 			$this->form[] = ['label'=>'Provinsi','name'=>'provinsi','type'=>'text','validation'=>'required','width'=>'col-sm-4'];

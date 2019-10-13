@@ -46,14 +46,19 @@
 			$this->form[] = ['label'=>'Kabupaten/Kota','name'=>'kabupaten_id','type'=>'select','width'=>'col-sm-5','datatable'=>'kabupaten,name','parent_select'=>'provinsi_id'];
 			$this->form[] = ['label'=>'Kecamatan','name'=>'kecamatan_id','type'=>'select','width'=>'col-sm-5','datatable'=>'kecamatan,name','parent_select'=>'kabupaten_id'];
 			$this->form[] = ['label'=>'Kelurahan','name'=>'kelurahan_id','type'=>'select','width'=>'col-sm-5','datatable'=>'kelurahan,name','parent_select'=>'kecamatan_id'];
-			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'Rt','name'=>'rt','type'=>'number','validation'=>'max:255','width'=>'col-sm-3'];
 			$this->form[] = ['label'=>'Rw','name'=>'rw','type'=>'number','validation'=>'max:255','width'=>'col-sm-3'];
 			$this->form[] = ['label'=>'Kode Pos','name'=>'kode_pos','type'=>'number','validation'=>'required|min:1','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'No Telp','name'=>'no_telp','type'=>'number','validation'=>'required|numeric','width'=>'col-sm-5','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
 			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'text','validation'=>'min:1|max:255|unique:prakerin_instansi','width'=>'col-sm-5','placeholder'=>'Mohon input alamat email dengan benar'];
-			$this->form[] = ['label'=>'Web','name'=>'web','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-7'];
-			$this->form[] = ['label'=>'Npwp','name'=>'npwp','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-5'];
+			$this->form[] = ['label'=>'Web','name'=>'web','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-5'];
+			$this->form[] = ['label'=>'No. Npwp','name'=>'npwp','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-5'];
+			$this->form[] = ['label'=>'Url Maps','name'=>'url_maps','type'=>'textarea','validation'=>'min:1|max:255','width'=>'col-sm-5', 'help' => 'Masukan URL Navigasi Google Maps (Untuk mempermudah menuju ke instansi tujuan)', 'placeholder' => 'Contoh : https://www.google.com/maps/dir/-7.0687799,107.917791/smk+ika+kartika/@-7.0686042,107.9154537,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x2e68c9cf8077a023:0x8a1e424fae4dbb92!2m2!1d107.9174938!2d-7.0683501'];
+			$this->form[] = ['label'=>'Lampiran 1','name'=>'lampiran_legalitas_1','type'=>'upload','width'=>'col-sm-6','help'=>'Contoh: Lampiran NPWP/Dokumen MOU/Profil Instansi & Dokumen Lainnya'];
+			$this->form[] = ['label'=>'Lampiran 2','name'=>'lampiran_legalitas_2','type'=>'upload','width'=>'col-sm-6','help'=>'Contoh: Lampiran NPWP/Dokumen MOU/Profil Instansi & Dokumen Lainnya'];
+			$this->form[] = ['label'=>'Lampiran 3','name'=>'lampiran_legalitas_3','type'=>'upload','width'=>'col-sm-6','help'=>'Contoh: Lampiran NPWP/Dokumen MOU/Profil Instansi & Dokumen Lainnya'];
+			$this->form[] = ['label'=>'Lampiran 4','name'=>'lampiran_legalitas_4','type'=>'upload','width'=>'col-sm-6','help'=>'Contoh: Lampiran NPWP/Dokumen MOU/Profil Instansi & Dokumen Lainnya'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM

@@ -335,7 +335,7 @@
                         ->where('id', $kab_id)
                         ->first();
         $nama = $kabupaten->name;
-        return $nama;
+        return ucfirst($nama);
     }
     
     /**
