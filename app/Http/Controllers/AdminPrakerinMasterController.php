@@ -82,7 +82,7 @@
 	        */
 	        $this->addaction = array();
 	        $this->addaction[] = [
-	        	'label'=>'Peserta','url'=>CRUDBooster::adminPath('prakerin/kelola/peserta/[id]'),'icon'=>'flaticon-network','color'=>'default',
+	        	'label'=>'Kelola','url'=>CRUDBooster::adminPath('prakerin/kelola/peserta/[id]'),'icon'=>'flaticon-network','color'=>'default',
 	        ];
 
 	        /* 

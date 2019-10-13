@@ -40,6 +40,11 @@
 							data-toggle="modal" data-target="#informasi_penempatan" title="Informasi Penempatan">
 							<img src="{{ asset('metronic/media/icons/svg/Code/Info-circle.svg') }}"/>
 						</button>
+						<a href="#" 
+							class="btn btn-outline-warning btn-elevate btn-pill btn-elevate-air btn-circle btn-icon btn-sm"
+							title="Cetak Data Penempatan">
+							<img src="{{ asset('metronic/media/icons/svg/Devices/Printer.svg') }}"/>
+						</a>
 						</div>
 					</div>
 				</div>

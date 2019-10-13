@@ -15,8 +15,10 @@ use App\Models\Pesdik;
 use App\Models\Rombel;
 use Yajra\DataTables\DataTables;
 use PDF;
+
 class PrakerinController extends Controller
 {
+
     public function index()
     {
 
@@ -27,6 +29,7 @@ class PrakerinController extends Controller
         $count = Penempatan::where('prakerin_master_id', $id)->count();
         return $count;
     }
+
     public function count_peserta($id)
     {
         $count = Penempatan::find($id)->pesdik()->count();
@@ -260,7 +263,8 @@ class PrakerinController extends Controller
 
     public function cetak_surat_pengantar(Request $request)
     {   
-        $sekolah            = Sekolah::find(1);
+        // Fungsi method first() pada model untuk mengambil data pertama pada database
+        $sekolah            = Sekolah::first();
         $master_id          = $request->input('master_id');
         $penempatan_id      = $request->input('penempatan_id');
         $no_surat           = $request->input('nomor_surat');
