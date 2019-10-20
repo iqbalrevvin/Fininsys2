@@ -35,7 +35,7 @@
 			$this->col[] = ["label"=>"No Telp","name"=>"no_telp"];
 			$this->col[] = ["label"=>"Email","name"=>"email"];
 			$this->col[] = ["label"=>"Web","name"=>"web"];
-			$this->col[] = ["label"=>"Npwp","name"=>"npwp"];
+			// $this->col[] = ["label"=>"Npwp","name"=>"npwp"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -106,7 +106,9 @@
 	        | 
 	        */
 	        $this->addaction = array();
-
+	        $this->addaction[] = [
+	        	'label'=>'Peta Lokasi','url'=>CRUDBooster::adminPath('prakerin/instansi/mapping/[id]'),'icon'=>'flaticon-map-location','color'=>'default',
+	        ];
 
 	        /* 
 	        | ---------------------------------------------------------------------- 

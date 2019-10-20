@@ -280,11 +280,53 @@ class PrakerinController extends Controller
     }
     public function CetakDaftarInstansi(Request $request)
     {
+        $sekolah            = Sekolah::first();
         $prakerin_master    = $request->input('prakerin_master');
         $prakerin           = PrakerinMaster::find($prakerin_master);
-        $page_title = 'Daftar instansi';
+        $page_title         = 'Daftar instansi';
+        $customPaper        = array(0,0,600,1000);
         PDF::setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
-        $pdf = PDF::loadview('prakerin.cetak.daftar_instansi',compact('page_title', 'prakerin'))->setPaper($customPaper, 'landscape');
+        $pdf = PDF::loadview('prakerin.cetak.daftar_instansi',compact('sekolah','page_title', 'prakerin'))->setPaper($customPaper, 'landscape');
         return $pdf->stream('Daftar Instansi.pdf'); 
     }
+    public function CetakDaftarPeserta(Request $request)
+    {
+        $sekolah        = Sekolah::first();
+        $master_id      = $request->input('master_id');
+        $prakerin       = PrakerinMaster::find($master_id);
+        foreach($prakerin->penempatan as $penempatan){
+            $instansi[] = $penempatan->id;     
+        }
+        $peserta  = DB::table('penempatan_pesdik')
+                      ->whereIn('penempatan_id', $instansi)
+                      ->join('pesdik', 'penempatan_pesdik.pesdik_id', 'pesdik.id')
+                      ->get();
+        $customPaper = array(0,0,600,1000);
+        PDF::setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadview('prakerin.cetak.daftar_peserta',compact('master_id','prakerin', 'peserta'))->setPaper($customPaper, 'landscape');
+        return $pdf->stream('Daftar Peserta.pdf'); 
+
+    }
+
+    public function MappingInstansi($id)
+    {
+        $page_title = 'Mapping Instansi';
+        $instansi = Instansi::find($id);
+        return view('prakerin.maps.mapping_instansi', compact('page_title', 'instansi'));
+    }
+
+    public function UpdateMappingInstansi(Request $request, $id)
+    {
+        $this->validate($request,[
+            'lat' => 'required',
+            'lng' => 'required'
+        ]);
+        $instansi = Instansi::find($id);
+        $instansi->lat = $request->lat;
+        $instansi->lng = $request->lng;
+        $instansi->save();
+
+        return back()->with('success', 'Peta Lokasi Berhasil Diperbarui');
+    }
+
 }

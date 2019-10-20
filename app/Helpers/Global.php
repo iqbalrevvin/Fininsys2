@@ -424,5 +424,10 @@
             return $val;
         }
     /*END::PEMBIMBING LAPANGAN*/
+    /*START::JUMLAH PESERTA PRAKERIN*/
+        function jumlah_peserta_prakerin($penempatan_id){
+            $jumlah_peserta = DB::table('penempatan_pesdik')->where('penempatan_id', $penempatan_id)->count();
+            return $jumlah_peserta;
+        }
 
  ?>

@@ -12,12 +12,16 @@ class Prodi extends Model
      */
     public function pesdik()
     {
-        return $this->hasMany(Prodi::Class);
+        return $this->hasMany(Pesdik::Class);
     }
     
     public function kelas()
     {
         return $this->hasMany(Kelas::Class);
+    }
+    public function tenpen()
+    {
+        return $this->belongsTo(Tenpen::Class);
     }
     
 }

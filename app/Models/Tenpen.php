@@ -15,5 +15,9 @@ class Tenpen extends Model
     {
         return $this->hasMany(Rombel::Class);
     }
-    
+    public function prodi()
+    {
+        return $this->hasMany(Prodi::Class);
+    }
+
 }

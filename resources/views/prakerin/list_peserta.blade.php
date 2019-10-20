@@ -54,7 +54,7 @@
 										<div class="dropdown-menu dropdown-menu-right">
 											<ul class="kt-nav">
 												<li class="kt-nav__item">
-													<a href="#" data-id="{{ $peserta->id }}" data-nama="{{ $peserta->nama_lengkap }}" 
+													<a href="javascript:;" data-id="{{ $peserta->id }}" data-nama="{{ $peserta->nama_lengkap }}" 
 														class="hapus_peserta kt-nav__link">
 														<i class="kt-nav__link-icon flaticon2-trash"></i>
 														<span class="kt-nav__link-text">Hapus</span>
@@ -65,7 +65,8 @@
 									</div>
 								</div>
 								<span class="kt-notes__body">
-									<a href="#" class="kt-font-success">Lihat Profil</a> | 
+									<a href="{{CRUDBooster::adminPath('peserta-didik/profil/'.$peserta->id)}}" 
+										class="kt-font-success nav_block">Lihat Profil</a> | 
 									<a href="javascript:;" data-toggle="modal" data-target="#detail_peserta{{$peserta->id}}" class="kt-font-success">Detail</a>
 								</span>
 							</div>

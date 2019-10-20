@@ -33,6 +33,7 @@
 			$this->col[] = ["label"=>"Sekolah Id","name"=>"sekolah_id","join"=>"sekolah,nama_sekolah"];
 			$this->col[] = ["label"=>"Nama Program Studi","name"=>"nama"];
 			$this->col[] = ["label"=>"Singkatan","name"=>"singkatan"];
+			$this->col[] = ["label"=>"Kepala Prodi","name"=>"tenpen_id","join"=>"tenpen,nama_lengkap"];
 			$this->col[] = ["label"=>"Logo Prodi","name"=>"logo_prodi","image"=>true];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -41,6 +42,7 @@
 			$this->form[] = ['label'=>'Sekolah Id','name'=>'sekolah_id','type'=>'select2','validation'=>'required','width'=>'col-sm-5','datatable'=>'sekolah,nama_sekolah'];
 			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required','width'=>'col-sm-5','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
 			$this->form[] = ['label'=>'Singkatan','name'=>'singkatan','type'=>'text','validation'=>'required','width'=>'col-sm-4'];
+			$this->form[] = ['label'=>'Kepala Program Studi','name'=>'tenpen_id','type'=>'select2','validation'=>'required','width'=>'col-sm-4','datatable'=>'tenpen,nama_lengkap'];
 			$this->form[] = ['label'=>'Logo','name'=>'logo_prodi','type'=>'upload','width'=>'col-sm-3'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -235,7 +237,7 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-	        //Your code here
+	        
 	            
 	    }
 
@@ -246,7 +248,9 @@
 	    |
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
-	    	//Your code here
+	    	if($column_index == 2) { 
+	    		$column_value = "<div style='text-align:left'><b>$column_value</b></div>"; 
+	    	}
 	    }
 
 	    /*

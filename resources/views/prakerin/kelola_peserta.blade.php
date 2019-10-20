@@ -1,5 +1,9 @@
 @extends('crudbooster::admin_template')
 @section('content')
+{{-- <div class="visible-print text-center">
+    {!! QrCode::size(100)->generate('123'); !!}
+    <p>Scan me to return to the original page.</p>
+</div> --}}
 	<input type="hidden" id="rombel_id" value="{{ $master_prakerin->rombel->id }}">
 	<div class="alert alert-light alert-elevate" role="alert">
 			@if($master_prakerin->rombel->kelas->prodi->logo_prodi == NULL)
@@ -7,16 +11,29 @@
 					<span>{{ $master_prakerin->rombel->kelas->prodi->singkatan }}</span>
 				</div>
 			@else
-				<img class="kt-widget__img kt-hidden-" src="{{ asset($master_prakerin->rombel->kelas->prodi->logo_prodi) }}" alt="image" style="height: 50px;">
+				<img class="kt-widget__img " src="{{ asset($master_prakerin->rombel->kelas->prodi->logo_prodi) }}" alt="image" style="height: 50px;">
 			@endif	
 			&nbsp;
 		<div class="alert-text">
 			{{-- Kelola rombel adalah pengelolaan rombongan belajar siswa yang terdapat pada rombel 
 			<b>{{ $rombel->kelas->nama }}</b> Tahun Ajaran <b>{{ $rombel->tahun_ajaran->nama }}</b> --}}
-			Kelola Peserta Prakerin Periode {{ $master_prakerin->TahunAjaran->nama }}<br>
+			Kelola Peserta Prakerin Periode <b>{{ $master_prakerin->TahunAjaran->nama }}</b><br>
 			<small>Peserta Didik Rombel <b>{{ $master_prakerin->rombel->kelas->nama }}</b> yang akan tampil pada penambahan peserta prakerin</small>
-			<br>
-			<a href="{{ CRUDBooster::adminPath('prakerin_master') }}" class="nav_block">Kembali Ke Daftar Master Prakerin</a>
+			<hr>
+			<a href="{{ CRUDBooster::adminPath('prakerin_master') }}" title="Kembali Ke Daftar Master Prakerin" 
+				class="btn btn-outline-danger btn-elevate btn-pill btn-elevate-air btn-circle btn-sm nav_block">
+                <i class="la la-arrow-left"></i>
+                    <span class="kt-hidden-mobile">
+                        Kembali
+                    </span>
+                </a>
+			<a href={{ CRUDBooster::adminPath('prakerin/cetak-daftar-peserta?master_id='.$master_prakerin->id) }} 
+				class="btn btn-outline-warning btn-elevate btn-pill btn-elevate-air btn-circle btn-sm nav_block"
+				target="_blank" 
+				title="Cetak Daftar Peserta">
+				<i class="la la-print"></i>
+				Daftar Peserta
+			</a>
 		</div>
 	</div>
 	<div class="row">

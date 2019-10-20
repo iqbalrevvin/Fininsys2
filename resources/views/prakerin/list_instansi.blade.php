@@ -30,7 +30,8 @@
 						<div class="dropdown-menu dropdown-menu-right">
 							<ul class="kt-nav">
 								<li class="kt-nav__item">
-									<a href="#" data-id="{{ $list->id }}" data-nama="{{ $list->instansi->nama }}" 
+									<a href="javascript:;" data-id="{{ $list->id }}" 
+										data-nama="{{ $list->instansi->nama }}" 
 										class="hapus_instansi kt-nav__link">
 										<i class="kt-nav__link-icon flaticon2-trash"></i>
 										<span class="kt-nav__link-text">Hapus</span>

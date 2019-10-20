@@ -48,6 +48,10 @@ Route::group([
     /*END::TENAGA PENDDIDIK*/
     /*STAR::PRAKERIN*/
     Route::group(['prefix' => 'admin/prakerin', 'namespace' => 'Prakerin'], function () {
+        // START::INSTANSI
+        Route::get('instansi/mapping/{id}', 'PrakerinController@MappingInstansi');
+        Route::post('instansi/mapping/{id}/update', 'PrakerinController@UpdateMappingInstansi');
+        // END::INSTANSI
         Route::get('count-instansi/{id}','PrakerinController@count_instansi')->name('prakerin.count');
         Route::get('kelola/peserta/{id}', 'PrakerinController@peserta');
         Route::post('kelola/insert-penempatan', 'PrakerinController@insert_penempatan')->name('prakerin.insert_penempatan');
@@ -64,6 +68,8 @@ Route::group([
             ->name('prakerin.cetak_surat_pengantar');
         Route::get('cetak/daftar-instansi', 'PrakerinController@CetakDaftarInstansi')
             ->name('prakerin.cetak_daftar_instansi');
+        Route::get('cetak-daftar-peserta', 'PrakerinController@CetakDaftarPeserta')
+            ->name('prakerin.cetak_daftar_peserta');
     });
     /*END::PRAKERIN*/
 
@@ -77,3 +83,5 @@ Route::get('admin/testajax','TestAjaxController@index');
 Route::get('admin/testajax/respone', 'TestAjaxController@responeajax')->name('testajax.respone');
 Route::get('admin/testajax/kabupaten','TestAjaxController@list_kabupaten')->name('testajax.list_kabupaten');
 Route::get('admin/testajax/kecamatan','TestAjaxController@list_kecamatan')->name('testajax.list_kecamatan');
+Route::get('admin/test-maps', 'TestMapsController@index')->name('maps.index');
+Route::post('admin/maps-add', 'TestMapsController@add')->name('maps.add');

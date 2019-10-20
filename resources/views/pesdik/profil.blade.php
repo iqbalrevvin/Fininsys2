@@ -109,6 +109,11 @@
 				<div class="kt-widget__bottom">
 					<div class="kt-widget__item">
 						<div class="kt-widget__details">
+							<a href="{{ URL::previous() }}" 
+								class="btn btn-danger btn-elevate btn-pill btn-elevate-air btn-sm btn-bold nav_block">
+							<i class="flaticon flaticon2-fast-back"></i> Kembali</a>&nbsp;
+						</div>
+						<div class="kt-widget__details">
 							<a href="#" class="btn btn-info btn-elevate btn-pill btn-elevate-air btn-sm btn-bold" data-toggle="modal" data-target="#modal-komentar" data-backdrop="static">
 							<i class="la la-print"></i> Surat Keterangan</a>&nbsp;
 						</div>
