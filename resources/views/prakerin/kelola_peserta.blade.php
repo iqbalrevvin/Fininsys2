@@ -72,7 +72,7 @@
 								<input type='text' title="Cari Instansi" class='form-control notfocus' id="cari_instansi" placeholder="Pencarian" />
 							</div>
 						</div>
-						<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="true" style="height: 500px;">
+						<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="true" style="height: 600px;">
 							<div id="show_instansi">
 				                <div class="kt-blockui text-justify">
 				                    <span>

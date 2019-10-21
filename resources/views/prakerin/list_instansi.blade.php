@@ -10,7 +10,8 @@
 			<div class="kt-notes__content list_instansi">
 				<div class="kt-notes__section">
 					<div class="kt-notes__info" >
-						<a href="javascript:;" data-id="{{ $list->id }}" data-nama="{{ $list->instansi->nama }}" class="kelola_peserta kt-notes__title">
+						<a href="javascript:;" data-id="{{ $list->id }}" data-nama="{{ $list->instansi->nama }}" 
+							class="kelola_peserta kt-notes__title">
 							{{-- {{ nama_instansi($list->prakerin_instansi_id) }} --}}
 							{{ $list->instansi->nama }}
 						</a>

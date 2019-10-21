@@ -84,6 +84,10 @@
 	        $this->addaction[] = [
 	        	'label'=>'Kelola','url'=>CRUDBooster::adminPath('prakerin/kelola/peserta/[id]'),'icon'=>'flaticon-network','color'=>'default',
 	        ];
+	        $this->addaction[] = [
+	        	'label'=>'Daftar Lokasi','url'=>CRUDBooster::adminPath('prakerin/list-lokasi/[id]'),'icon'=>'flaticon2-maps','color'=>'default',
+	        ];
+
 
 	        /* 
 	        | ---------------------------------------------------------------------- 

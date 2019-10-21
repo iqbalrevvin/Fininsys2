@@ -298,12 +298,16 @@ class PrakerinController extends Controller
             $instansi[] = $penempatan->id;     
         }
         $peserta  = DB::table('penempatan_pesdik')
-                      ->whereIn('penempatan_id', $instansi)
-                      ->join('pesdik', 'penempatan_pesdik.pesdik_id', 'pesdik.id')
-                      ->get();
+                        ->select('pesdik.nama_lengkap','pesdik.NIPD','pesdik.NISN','pesdik.jenis_kelamin','prakerin_penempatan.*', 'prakerin_instansi.nama as nama_instansi')
+                        ->whereIn('penempatan_id', $instansi)
+                        ->join('pesdik', 'penempatan_pesdik.pesdik_id', 'pesdik.id')
+                        ->join('prakerin_penempatan', 'penempatan_pesdik.penempatan_id', 'prakerin_penempatan.id')
+                        ->join('prakerin_instansi', 'prakerin_penempatan.instansi_id', 'prakerin_instansi.id')
+                        ->orderBy('nama_instansi', 'asc')
+                        ->get();
         $customPaper = array(0,0,600,1000);
         PDF::setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
-        $pdf = PDF::loadview('prakerin.cetak.daftar_peserta',compact('master_id','prakerin', 'peserta'))->setPaper($customPaper, 'landscape');
+        $pdf = PDF::loadview('prakerin.cetak.daftar_peserta',compact('sekolah','master_id','prakerin', 'peserta'))->setPaper($customPaper, 'potrait');
         return $pdf->stream('Daftar Peserta.pdf'); 
 
     }

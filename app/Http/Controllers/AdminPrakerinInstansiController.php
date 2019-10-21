@@ -109,6 +109,7 @@
 	        $this->addaction[] = [
 	        	'label'=>'Peta Lokasi','url'=>CRUDBooster::adminPath('prakerin/instansi/mapping/[id]'),'icon'=>'flaticon-map-location','color'=>'default',
 	        ];
+	        
 
 	        /* 
 	        | ---------------------------------------------------------------------- 

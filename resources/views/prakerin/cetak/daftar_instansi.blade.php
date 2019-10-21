@@ -44,14 +44,14 @@
             <td style="width: 33.3333%;">Mengetahui,</td>
         </tr>
         <tr>
-            <td style="width: 33.3333%;">Teknik Komputer Jaringan</td>
+            <td style="width: 33.3333%;">{{$prakerin->rombel->kelas->prodi->nama}}</td>
             <td style="width: 33.3333%;">&nbsp;</td>
             <td style="width: 33.3333%;">Kepala Sekolah/Lembaga</td>
         </tr>
         <tr>
             <td style="width: 33.3333%;">&nbsp;</td>
             <td style="width: 33.3333%;">&nbsp;</td>
-            <td style="width: 33.3333%;">SMK IKA KARTIKA</td>
+            <td style="width: 33.3333%;">{{$sekolah->nama_sekolah}}</td>
         </tr>
         <tr>
             <td style="width: 33.3333%;">
