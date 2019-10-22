@@ -5,7 +5,7 @@
 		$tapel_aktif_id = tapel_aktif()->id; 
 	@endphp
 	<!--Begin:: Portlet-->
-	<div class="kt-portlet">
+	<div class="kt-portlet kt-portlet--responsive-mobile">
 		<div class="kt-portlet__body">
 			<div class="kt-widget kt-widget--user-profile-3">
 				<div class="kt-widget__top">
@@ -90,10 +90,10 @@
 							</div>
 						</div>
 						<div class="kt-widget__subhead">
-							<a href="#"><i class="socicon-whatsapp"></i>{{ $pesdik->no_telp }}</a>
-							<a href="#"><i class="socicon-facebook"></i>{{ $pesdik->facebook }}</a>
-							<a href="#"><i class="socicon-instagram"></i>{{ $pesdik->instagram }}</a>
-							<a href="#"><i class="socicon-twitter"></i>{{ $pesdik->twitter }}</a>
+							<a href="#"><i class="socicon-whatsapp"></i><span class="kt-hidden-mobile">{{ $pesdik->no_telp }}</span></a>
+							<a href="#"><i class="socicon-facebook"></i><span class="kt-hidden-mobile">{{ $pesdik->facebook }}</span></a>
+							<a href="#"><i class="socicon-instagram"></i><span class="kt-hidden-mobile">{{ $pesdik->instagram }}</span></a>
+							<a href="#"><i class="socicon-twitter"></i><span class="kt-hidden-mobile">{{ $pesdik->twitter }}</span></a>
 						</div>
 						<div class="kt-widget__info">
 							<div class="kt-widget__desc">
@@ -106,7 +106,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="kt-widget__bottom">
+				<div class="kt-widget__bottom kt-hidden-mobile">
 					<div class="kt-widget__item">
 						<div class="kt-widget__details">
 							<a href="{{ URL::previous() }}" 

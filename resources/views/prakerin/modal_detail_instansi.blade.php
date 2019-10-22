@@ -5,7 +5,7 @@
 				<h5 class="modal-title" id="exampleModalLongTitle">Detail Informasi</b></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="kt-portlet kt-portlet--responsive-mobile" id="">
+			<div class="kt-portlet" id="">
 				<div class="edit_penempatan kt-portlet__body">
 					<p>Detail informasi dari instansi {{$list->instansi->nama}}</p>
 					<table style="border-collapse: collapse; width: 100%; height: 108px;" border="0">

@@ -5,7 +5,7 @@
 				<h5 class="modal-title" id="exampleModalLongTitle">Data Rombel {{ $master_prakerin->rombel->kelas->nama }}</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="kt-portlet kt-portlet--responsive-mobile" id="konten_tambah_peserta">
+			<div class="kt-portlet" id="konten_tambah_peserta">
 				<div class="kt-portlet__head">
 					<div class="kt-portlet__head-label">
 						<span class="kt-portlet__head-icon">

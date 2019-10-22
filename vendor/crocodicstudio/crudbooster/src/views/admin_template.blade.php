@@ -144,6 +144,14 @@
             .form-group > label:first-child {
                 display: block
             }
+            body {
+               
+            }
+            .kt-portlet--height-fluid, .kt-portlet--mobile, .kt-portlet--responsive-mobile, .alert {
+                -webkit-box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2);
+                box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2);
+                background-color: #FFFFFF;
+            } 
         </style>
 
         @stack('head')
@@ -152,7 +160,7 @@
     <!-- end::Head -->
 
     <!-- begin::Body -->
-    <body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--fixed kt-aside--minimize kt-page--loading">
+    <body style="background: {{ asset('image/bg-body.png') }}" class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--fixed kt-aside--minimize kt-page--loading">
         <!-- begin:: Header Mobile -->
         @include('crudbooster::layouts.partials._menu_header_mobile')
         <!-- end:: Header Mobile -->

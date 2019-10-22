@@ -45,7 +45,7 @@
 					@if($button_show)
 						<a href="{{ CRUDBooster::mainpath().'?'.http_build_query(Request::all()) }}"
 							id='btn_show_data' 
-							class="btn kt-subheader__btn-primary btn-icon nav_block" 
+							class="btn btn-brand btn-elevate btn-elevate-air kt-subheader__btn-primary btn-icon nav_block" 
 							data-toggle="kt-tooltip" title="Muat Ulang Data" data-placement="left">
 							<i class="flaticon2-reload"></i>
 						</a>
@@ -53,7 +53,7 @@
 					@if($button_add && CRUDBooster::isCreate())
 						<a href="{{ CRUDBooster::mainpath('add').'?return_url='.urlencode(Request::fullUrl()).'&parent_id='.g('parent_id').'&parent_field='.$parent_field }}"
 							id='btn_add_new_data' 
-							class="btn kt-subheader__btn-primary btn-icon nav_block" 
+							class="btn btn-brand btn-elevate btn-elevate-air kt-subheader__btn-primary btn-icon nav_block" 
 							data-toggle="kt-tooltip" title="Tambah Data" data-placement="left">
 							<i class="flaticon-add"></i>
 						</a>
@@ -61,7 +61,7 @@
 				@endif
 				@if($button_export && CRUDBooster::getCurrentMethod() == 'getIndex')
 					<a href="javascript:void(0)" id='btn_export_data' data-url-parameter='{{$build_query}}'
-						class="btn kt-subheader__btn-primary btn-icon btn-export-data" 
+						class="btn btn-brand btn-elevate btn-elevate-air kt-subheader__btn-primary btn-icon btn-export-data" 
 						data-toggle="kt-tooltip" title="Export Data" data-placement="right">
 						<i class="fa fa-file-export"></i>
 					</a>
@@ -69,7 +69,7 @@
 				@if($button_import && CRUDBooster::getCurrentMethod() == 'getIndex')
 					<a href="{{ CRUDBooster::mainpath('import-data') }}" id='btn_import_data' 
 						data-url-parameter='{{$build_query}}'
-						class="btn kt-subheader__btn-primary btn-icon btn-import-data" 
+						class="btn btn-brand btn-elevate btn-elevate-air kt-subheader__btn-primary btn-icon btn-import-data" 
 						data-toggle="kt-tooltip" title="Import Dari Excel" data-placement="right">
 						<i class="fa fa-upload"></i>
 					</a>

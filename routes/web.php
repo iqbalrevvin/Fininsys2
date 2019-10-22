@@ -73,6 +73,10 @@ Route::group([
     });
     /*END::PRAKERIN*/
 
+    Route::group(['prefix' => 'admin/surat', 'namespace' => 'Surat'], function () {
+       Route::get('cetak/{id}', 'SuratController@CetakSurat');
+    });
+
 });
 
 

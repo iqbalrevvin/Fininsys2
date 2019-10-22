@@ -5,7 +5,7 @@
 				<h5 class="modal-title" id="exampleModalLongTitle">Tambah Tempat Prakerin</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="kt-portlet kt-portlet--responsive-mobile" id="kontenTambahSiswa">
+			<div class="kt-portlet" id="kontenTambahSiswa">
 				<div class="insert_penempatan kt-portlet__body">
 					<form class="add_tempat kt-form kt-form--fit kt-form--label-right">
 						<input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">

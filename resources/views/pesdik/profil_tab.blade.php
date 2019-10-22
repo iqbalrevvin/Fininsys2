@@ -1,6 +1,6 @@
 <div class="col-md-8">
 	<!--Begin:: Portlet-->
-	<div class="kt-portlet kt-portlet--tabs">
+	<div class="kt-portlet kt-portlet--responsive-mobile kt-portlet--tabs ">
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-toolbar">
 				<ul class="nav nav-tabs nav-tabs-space-lg nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand" role="tablist">

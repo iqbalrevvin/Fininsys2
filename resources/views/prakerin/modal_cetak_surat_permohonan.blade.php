@@ -5,7 +5,7 @@
 				<h5 class="modal-title" id="exampleModalLongTitle">Cetak Surat Permohonan</b></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="kt-portlet kt-portlet--responsive-mobile" id="">
+			<div class="kt-portlet" id="">
 				<div class="edit_penempatan kt-portlet__body">
 					<p>Sebelum mencetak surat permohonan, 
 						<br>pastikan <a href="{{ url('admin/sekolah') }}" target="_blank"><b>Profil Sekolah</b></a> sudah dilengkapi 
