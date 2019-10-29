@@ -53,7 +53,7 @@
 					Tgl Selesai : {{ mediumdate_indo($list->tgl_selesai) }}<br>
 					Pembimbing Lapangan : {{ gender_pembimbing($list->pembimbing_lapangan->jenis_kelamin) }} {{ $list->pembimbing_lapangan->nama }}<br>
 					Pembimbing Akademik : {{ $list->tenpen->nama_lengkap }}<hr>
-					<a href="#"><b>Lihat Peta</b></a> 
+					<a href="{{ route('instansi.mapping', ['id' => $list->instansi->id]) }}"><b>Atur Peta</b></a> 
 					| <a href="#" data-toggle="modal" data-target="#detail_instansi{{$list->id}}"><b>Detail</b></a> 
 					| <a href="javascript:;" data-toggle="modal" 
 						data-target="#cetak_surat_permohonan{{$list->instansi->id}}"><b>Surat Permohonan</b></a>

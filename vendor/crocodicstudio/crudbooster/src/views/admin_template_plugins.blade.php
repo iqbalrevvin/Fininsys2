@@ -55,6 +55,13 @@
 {{-- PRELOADER --}}
 <link rel="stylesheet" href="{{ asset('vendor/pace-preloader/blue/pace-theme-center-simple.css')}}" />
 <script src="{{ asset('vendor/pace-preloader/pace.min.js')}}" type="text/javascript"></script>
+{{-- PRELOADER --}}
+
+{{-- AVN-SKELETON --}}
+<link rel="stylesheet" href="{{ asset('vendor/avn-skeleton/avnSkeleton.css')}}" />
+<script src="{{ asset('vendor/avn-skeleton/avnPlugin.js')}}" type="text/javascript"></script>
+<script src="{{ asset('vendor/avn-skeleton/avnSkeleton.js')}}" type="text/javascript"></script>
+{{-- AVN-SKELETON --}}
 
 
 <script>

@@ -9,7 +9,7 @@
 				<div class="edit_penempatan kt-portlet__body">
 					<form class="edit_tempat kt-form kt-form--fit kt-form--label-right">
 						<input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">
-						<input type="hidden" name="master_id" id="master_id" value="{{ $master_prakerin->id }}">
+						{{-- <input type="hidden" name="master_id" id="master_id" value="{{ $master_prakerin->id }}"> --}}
 						{{-- <div class="form-group row">
 							<label class="col-form-label col-lg-3 col-sm-12">Instansi/DU/DI</label>
 							<div class=" col-lg-6 col-md-9 col-sm-12">

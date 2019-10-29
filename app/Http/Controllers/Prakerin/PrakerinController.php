@@ -333,4 +333,17 @@ class PrakerinController extends Controller
         return back()->with('success', 'Peta Lokasi Berhasil Diperbarui');
     }
 
+    public function ListLokasi($id)
+    {
+        $page_title         = 'List Lokasi Instansi';
+        $sekolah            = Sekolah::first();
+        $master_prakerin    = PrakerinMaster::find($id);
+        $instansi           = Instansi::select('prakerin_instansi.kabupaten_id')
+                                        ->orderBy('prakerin_instansi.kabupaten_id')
+                                        ->groupBy('prakerin_instansi.kabupaten_id')
+                                        ->get();
+        $list_instansi      = Penempatan::where('prakerin_master_id', $id)->get();
+        return view('prakerin.maps.list_lokasi_instansi', compact('page_title','sekolah', 'master_prakerin', 'instansi', 'list_instansi'));
+    }
+
 }

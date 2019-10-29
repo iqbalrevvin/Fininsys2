@@ -550,21 +550,32 @@
 
 				<!--begin: Navigation -->
 				<div class="kt-notification">
-					<a href="{{ route('AdminCmsUsersControllerGetProfile') }}" class="kt-notification__item">
+					<a href="#" class="kt-notification__item">
 						<div class="kt-notification__item-icon">
-							<i class="flaticon2-calendar-3 kt-font-success"></i>
+							<i class="flaticon-profile-1 kt-font-success"></i>
 						</div>
 						<div class="kt-notification__item-details">
 							<div class="kt-notification__item-title kt-font-bold">
 								Profil
 							</div>
 							<div class="nav_block kt-notification__item-time">
-								Pengaturan Akun & Lainnya
+								Biodata, Kontak, dll.
 							</div>
 						</div>
 					</a>
-
-
+					<a href="{{ route('AdminCmsUsersControllerGetProfile') }}" class="kt-notification__item">
+						<div class="kt-notification__item-icon">
+							<i class="flaticon2-calendar-3 kt-font-success"></i>
+						</div>
+						<div class="kt-notification__item-details">
+							<div class="kt-notification__item-title kt-font-bold">
+								Pengaturan Akun
+							</div>
+							<div class="nav_block kt-notification__item-time">
+								Nama, Email, Username & Password
+							</div>
+						</div>
+					</a>
 					<div class="nav_block kt-notification__custom kt-space-between">
 						<a href="{{ route('getLockScreen') }}" target="_blank" 
 							class="btn btn-label btn-label-brand btn-sm btn-bold">

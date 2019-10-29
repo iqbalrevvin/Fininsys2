@@ -4,7 +4,44 @@
     {!! QrCode::size(100)->generate('123'); !!}
     <p>Scan me to return to the original page.</p>
 </div> --}}
+<style type="text/css">
+
+.skeleton header {
+    padding: 2.0rem;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #bce8f1;
+    background-color: #d9edf7;;
+    color: #31708f;
+    font-size: 1.5rem;
+}
+.skeleton2 header {
+    padding: 1.5rem;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #bce8f1;
+    background-color: #d9edf7;;
+    color: #31708f;
+    font-size: 1rem;
+}
+.skeleton2 main {
+    padding: 2.0rem;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #bce8f1;
+    background-color: #fff;
+    color: #31708f;
+    font-size: 1rem;
+}
+.wrapper main {
+    padding: 1.0rem;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #bce8f1;
+    background-color: #d9edf7;;
+    color: #31708f;
+    font-size: 1.5rem;
+}
+
+</style>
 	<input type="hidden" id="rombel_id" value="{{ $master_prakerin->rombel->id }}">
+	<input type="hidden" name="master_id" id="master_id" value="{{ $master_prakerin->id }}">
 	<div class="alert alert-light alert-elevate" role="alert">
 			@if($master_prakerin->rombel->kelas->prodi->logo_prodi == NULL)
 				<div class="kt-userpic kt-userpic--lg kt-userpic--danger">
@@ -28,7 +65,7 @@
                     </span>
                 </a>
 			<a href={{ CRUDBooster::adminPath('prakerin/cetak-daftar-peserta?master_id='.$master_prakerin->id) }} 
-				class="btn btn-outline-warning btn-elevate btn-pill btn-elevate-air btn-circle btn-sm nav_block"
+				class="btn btn-outline-warning btn-elevate btn-pill btn-elevate-air btn-circle btn-sm"
 				target="_blank" 
 				title="Cetak Daftar Peserta">
 				<i class="la la-print"></i>
@@ -73,13 +110,11 @@
 							</div>
 						</div>
 						<div class="kt-notes kt-scroll kt-scroll--pull" data-scroll="true" style="height: 600px;">
-							<div id="show_instansi">
-				                <div class="kt-blockui text-justify">
-				                    <span>
-				                        <div class="kt-loader kt-loader--brand"></div>
-				                    </span>
-				                    <b>Memuat Data Instansi . . .</b>
-				                </div>
+							<div id="show_instansi" class="skeleton">
+								@forelse($list_instansi as $list)
+									<header></header><br>
+								@empty
+								@endforelse
 							</div>		
 						</div>
 					</div>
@@ -91,7 +126,10 @@
 		<div class="col-md-6">
 			<!--begin::Portlet-->
 				<div id="konten_list_peserta"></div>
-				<div id="load_list_peserta"><b>Klik/Pilih Nama Instansi/DU/DI untuk melihat data peserta</b></div>
+				<div id="load_list_peserta" class="skeleton2">
+					<header>Klik/Pilih Nama Instansi/DU/DI untuk melihat data peserta</header>
+					<main>Daftar Peserta</main>
+				</div>
 			<!--end::Portlet-->
 		</div>
 	</div>
@@ -184,10 +222,29 @@
 		};
         jQuery(document).ready(function() {
         // START::OPERASI ---------------------------------------------------
+        	skeleton();
         	show_instansi();
-
         	DatatablesBasicPaginations.init();
+        	function skeleton(){
+        		$('.skeleton').avnSkeleton({
+				  // default configs
+				  cssPrefix: 'avn-skeleton',
+				  header: {
+				    selector: '> header',
+				    lines: 4,
+				    icon: true,
+				    loader: true
+				  },
+				  main: {
+				  	
+				    selector: '> main',
+				    paragraphs: 5,
+				    lines: 4
+				  }
+				});
+        	}
         	function show_instansi(){
+        		skeleton()
         		var master_id = $('#master_id').val();
         		$.ajax({
 			        url: '{{ route('prakerin.list_instansi') }}',
@@ -326,8 +383,25 @@
 			});
 
 	        $(document).on('click', '.kelola_peserta', function(e) {
+
 				$('#konten_list_peserta').fadeOut("slow");
-				$('#load_list_peserta').show().html('<div class="kt-block kt-page--loading" id="loader-center"><span><div class="kt-loader kt-bg-brand"></div></span><b>Memuat Data Peserta . . .</b></div>');
+				$('#load_list_peserta').avnSkeleton({
+				  // default configs
+				  cssPrefix: 'avn-skeleton',
+				  header: {
+				    selector: '> header',
+				    lines: 2,
+				    icon: true,
+				    loader: true
+				  },
+				  main: {
+				    selector: '> main',
+				    paragraphs: 5,
+				    lines: 4
+				  }
+				});
+				// $('#load_list_peserta').show().html('<div class="kt-block kt-page--loading" id="loader-center"><span><div class="kt-loader kt-bg-brand"></div></span><b>Memuat Data Peserta . . .</b></div>');
+				
 		    	var penempatan_id 			= $(this).data('id');
 		    	var nama_instansi 			= $(this).data('nama');
 		    	$.ajax({
@@ -342,7 +416,6 @@
 			        success: function(response){
 			        	$('#konten_list_peserta').fadeIn("slow").html(response);
 			        	$('#load_list_peserta').hide();
-		              	//$("#jenisNasabah").selectpicker();
 		        	},
 		        	error: function (jqXHR, textStatus, errorThrown){
 			        	swal.fire("Gagal Memperbarui", "Gagal dalam memproses data, coba untuk muat ulang halaman atau hubungi pihak pengembang", "warning");

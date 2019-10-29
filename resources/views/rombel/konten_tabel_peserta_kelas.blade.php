@@ -65,7 +65,9 @@
 							{!! getImgUser($peserta->foto, $peserta->nama_lengkap) !!}
 						</span>
 					</td>
-					<td><span id="nama_siswa{{ $peserta->id }}">{{ $peserta->nama_lengkap }}</span></td>
+					<td><span id="nama_siswa{{ $peserta->id }}">
+						<b><a href="{{ route('pesdik.profil', ['pesdik' => $peserta->id]) }}">{{ $peserta->nama_lengkap }}</a></b></span>
+					</td>
 					<td>{{ $peserta->jenis_kelamin }}</td>
 					<td>{{ $peserta->NIPD }}</td>
 					<td>{{ $peserta->NISN }}</td>

@@ -1,4 +1,5 @@
 @extends('crudbooster::admin_template')
 
-@section('dasbor.index')
+@section('content')
+	Dasbor Page!!!
 @endsection

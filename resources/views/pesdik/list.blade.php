@@ -85,7 +85,7 @@
 									@endif						
 								</div>
 								<div class="kt-widget__info">
-									<a href="{{ url('admin/peserta-didik/profil/'.$list->id)}}" class="kt-widget__username nav_block">
+									<a href="{{ route('pesdik.profil', ['pesdik' => $list->id]) }}" class="kt-widget__username nav_block">
 										{{ cut_name($list->nama_lengkap) }}
 										{{-- {{ $list->nama_lengkap }} --}}
 									</a>
@@ -130,7 +130,7 @@
 							</div>
 						</div>
 						<div class="kt-widget__footer">
-							<a href="{{ url('admin/peserta-didik/profil/'.$list->id)}}" 
+							<a href="{{ route('pesdik.profil', ['pesdik' => $list->id]) }}" 
 								class="btn btn-label-primary btn-lg btn-upper nav_block">
 								Lihat Profil
 							</a>

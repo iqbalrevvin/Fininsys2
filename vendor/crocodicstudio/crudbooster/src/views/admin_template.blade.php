@@ -352,6 +352,22 @@
                     KTApp.unblockPage();
                 }, 10000);
             });
+            $('.skeleton-loader').avnSkeleton({
+              // default configs
+              cssPrefix: 'avn-skeleton',
+              header: {
+                selector: '> header',
+                lines: 2,
+                icon: true,
+                loader: true
+              },
+              main: {
+                selector: '> main',
+                paragraphs: 3,
+                lines: 4
+              }
+              
+            });
         </script>
         @stack('bottom')
     </body>

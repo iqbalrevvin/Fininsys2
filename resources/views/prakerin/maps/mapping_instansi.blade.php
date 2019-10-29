@@ -70,7 +70,7 @@
 					{{-- 	<button type="button" class="" id="">
 							<i class="flaticon flaticon2-fast-back"></i> Kembali
 						</button> --}}
-						<a href="{{CRUDBooster::adminPath('prakerin_instansi')}}" class="btn btn-danger btn-elevate-hover btn-sm nav_block">
+						<a href="{{ URL::previous() }}" class="btn btn-danger btn-elevate-hover btn-sm nav_block">
 							<i class="flaticon flaticon2-fast-back"></i> Kembali
 						</a>
 						<button type="submit" name="submit" class="btn btn-success btn-elevate-hover btn-sm" id="insert_penempatan">
